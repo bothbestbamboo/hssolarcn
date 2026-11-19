@@ -2,13 +2,14 @@
 import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
 ---
 
-<header class="large">
+<header class="large site-header-cn">
+  <!-- 顶部弹出搜索栏 -->
   <div class="top-search clearfix">
     <div class="input-group container">
-      <em>你要买什么？</em>
+      <em>您正在寻找什么产品？</em>
       <div class="header_search clearfix">
         <form action="/category.html" method="get">
-          <input name="labels" type="text" class="form-control" placeholder="搜索产品名称或标签..." />
+          <input name="labels" type="text" class="form-control" placeholder="输入产品名称、功率或标签搜索..." />
           <input type="submit" class="search_btn btn_search1" value="" />
         </form>
       </div>
@@ -24,36 +25,49 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
     </div>
   </div>
 
+  <!-- 主导航栏 -->
   <div class="header clearfix">
-    <div class="container-big clearfix">
-      <h1>
-        <a id="logo" href="/"><img src={SITE.logoLight} alt={SITE.title} /></a>
-      </h1>
-      <h1>
-        <a href="/" id="logo1"><img src={SITE.logoDark} alt={SITE.title} /></a>
-      </h1>
+    <div class="container-big cn-header-inner">
+      <!-- 左侧横版 LOGO（适配 380x114） -->
+      <div class="cn-brand">
+        <a href="/" title={SITE.title}>
+          <img src={SITE.logoDark} alt={SITE.title} width="380" height="114" />
+        </a>
+      </div>
 
-      <div class="header_right">
-        <div class="header_top">
-          <ul class="menu">
+      <!-- 右侧双层 B2B 导航区 -->
+      <div class="header_right cn-nav-right">
+        <!-- 上排：咨询热线 + 辅助导航 -->
+        <div class="header_top cn-top-bar">
+          <a class="cn-hotline" rel="nofollow" href={`Tel:${SITE.phone}`}>
+            <i class="fa fa-phone"></i>
+            <span>咨询热线：{SITE.phone}</span>
+          </a>
+          <ul class="menu cn-top-menu">
             <li><a href="/about-us.html">关于宏晟</a></li>
-            <li><a href="/project.html">项目</a></li>
+            <li><a href="/project.html">项目案例</a></li>
             <li><a href="/play-solar.html">光伏知识</a></li>
-            <li><a href="/technical-services.html">支持</a></li>
+            <li><a href="/technical-services.html">技术支持</a></li>
             <li><a href="/faq.html">常见问题</a></li>
             <li><a href="/contact-us.html">联系我们</a></li>
           </ul>
         </div>
 
-        <div class="header_bottom">
+        <!-- 下排：产品主导航 + 搜索 + 获取报价按钮 -->
+        <div class="header_bottom cn-main-bar">
           <div class="mainmenu-area">
             <div class="mainmenu-left visible-lg visible-md">
               <div class="mainmenu">
                 <nav>
-                  <ul class="clearfix">
+                  <ul class="clearfix cn-main-menu">
                     {PRODUCT_CATEGORIES.map((cat) => (
                       <li class="product_vmegamenu">
-                        <a href={`/category-${cat.id}.html`}>{cat.name}</a>
+                        <a href={`/category-${cat.id}.html`}>
+                          <span>{cat.name}</span>
+                          {cat.children && cat.children.length > 0 && (
+                            <i class="fa fa-angle-down cn-nav-caret"></i>
+                          )}
+                        </a>
                         {cat.children && cat.children.length > 0 && (
                           <ul class="vmegamenu">
                             {cat.children.map((sub) => (
@@ -71,10 +85,15 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
             </div>
           </div>
 
-          <div class="search_box">
-            <div class="attr-nav">
-              <a class="search"><img src="/Public/theme/default/picture/search.png" alt="搜索" /></a>
+          <div class="cn-header-actions">
+            <div class="search_box">
+              <div class="attr-nav">
+                <a class="search cn-search-btn" href="javascript:void(0);" title="搜索产品" aria-label="搜索产品">
+                  <i class="fa fa-search"></i>
+                </a>
+              </div>
             </div>
+            <a href="/contact-us.html" class="cn-quote-btn">获取报价</a>
           </div>
         </div>
       </div>
@@ -105,14 +124,14 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
             </ul>
           </li>
           <li>
-            <a href="/about-us.html">关于我们</a>
+            <a href="/about-us.html">关于宏晟</a>
             <ul class="nav_child">
               <li><a href="/about-us.html">公司简介</a></li>
               <li><a href="/why-we-different.html">为什么我们不同</a></li>
               <li><a href="/news.html">新闻与事件</a></li>
             </ul>
           </li>
-          <li><a href="/project.html">项目</a></li>
+          <li><a href="/project.html">项目案例</a></li>
           <li>
             <a href="/play-solar.html">光伏知识</a>
             <ul class="nav_child">
@@ -122,7 +141,7 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
             </ul>
           </li>
           <li>
-            <a href="/technical-services.html">支持</a>
+            <a href="/technical-services.html">技术支持</a>
             <ul class="nav_child">
               <li><a href="/technical-services.html">技术服务</a></li>
             </ul>
@@ -134,3 +153,392 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
     </div>
   </div>
 </header>
+
+<style is:global>
+  /* =========================================================
+     宏晟光伏中文站 - 导航栏与 380x114 横版 LOGO 专属美化
+     ========================================================= */
+  header.site-header-cn,
+  header.site-header-cn.large,
+  header.site-header-cn.small {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 16px rgba(15, 23, 42, 0.07) !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    transition: all 0.25s ease;
+    z-index: 999 !important;
+  }
+
+  header.site-header-cn .header {
+    padding: 0 !important;
+    height: auto !important;
+    background: transparent !important;
+  }
+
+  /* 顶部容器：Flex 左右贴齐，垂直居中 */
+  header.site-header-cn .cn-header-inner {
+    max-width: 1320px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 10px 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 28px !important;
+    box-sizing: border-box;
+    transition: padding 0.25s ease;
+  }
+
+  header.site-header-cn.small .cn-header-inner {
+    padding: 6px 24px !important;
+  }
+
+  /* 取消容器 clearfix 伪元素对 Flex 的占位干扰 */
+  header.site-header-cn .cn-header-inner::before,
+  header.site-header-cn .cn-header-inner::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* 左侧 LOGO 区（380x114 等比清晰展示） */
+  header.site-header-cn .cn-brand {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  header.site-header-cn .cn-brand a {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+  }
+
+  header.site-header-cn .cn-brand img {
+    height: 58px !important;
+    width: auto !important;
+    max-width: 220px !important;
+    object-fit: contain;
+    display: block !important;
+    transition: height 0.25s ease;
+  }
+
+  header.site-header-cn.small .cn-brand img {
+    height: 48px !important;
+  }
+
+  /* 右侧双层导航容器 */
+  header.site-header-cn .cn-nav-right {
+    float: none !important;
+    width: auto !important;
+    flex: 1 1 auto;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 上排：热线 + 辅助导航 */
+  header.site-header-cn .cn-top-bar {
+    float: none !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 24px !important;
+    padding: 0 0 7px 0 !important;
+    margin: 0 0 6px 0 !important;
+    border-bottom: 1px solid #eef2f6 !important;
+  }
+
+  header.site-header-cn .cn-hotline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #2596d1 !important;
+    text-decoration: none !important;
+    white-space: nowrap;
+  }
+
+  header.site-header-cn .cn-hotline i {
+    font-size: 13px;
+  }
+
+  header.site-header-cn .cn-top-menu {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  header.site-header-cn .cn-top-menu li {
+    position: relative;
+    padding: 0 12px !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  header.site-header-cn .cn-top-menu li:last-child {
+    padding-right: 0 !important;
+  }
+
+  header.site-header-cn .cn-top-menu li + li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 11px;
+    background: #d1d5db;
+  }
+
+  header.site-header-cn .cn-top-menu li a {
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: #64748b !important;
+    transition: color 0.2s ease;
+    white-space: nowrap !important;
+  }
+
+  header.site-header-cn .cn-top-menu li a:hover {
+    color: #2596d1 !important;
+  }
+
+  /* 下排：主导航 + 搜索 + 获取报价 */
+  header.site-header-cn .cn-main-bar {
+    float: none !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 24px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  header.site-header-cn .mainmenu-area,
+  header.site-header-cn .mainmenu-left,
+  header.site-header-cn .mainmenu {
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  header.site-header-cn .cn-main-menu {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 26px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  header.site-header-cn .cn-main-menu > li {
+    position: relative;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  header.site-header-cn .cn-main-menu > li > a {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px;
+    padding: 8px 0 !important;
+    font-size: 15.5px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    line-height: 1.4 !important;
+    white-space: nowrap !important;
+    transition: color 0.2s ease;
+  }
+
+  /* 悬停底部滑动蓝线 */
+  header.site-header-cn .cn-main-menu > li > a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: #2596d1;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.22s ease;
+  }
+
+  header.site-header-cn .cn-main-menu > li:hover > a {
+    color: #2596d1 !important;
+  }
+
+  header.site-header-cn .cn-main-menu > li:hover > a::after {
+    transform: scaleX(1);
+  }
+
+  header.site-header-cn .cn-nav-caret {
+    font-size: 13px !important;
+    color: #94a3b8;
+    transition: transform 0.22s ease, color 0.22s ease;
+  }
+
+  header.site-header-cn .cn-main-menu > li:hover > a .cn-nav-caret {
+    transform: rotate(180deg);
+    color: #2596d1;
+  }
+
+  /* 现代化卡片式下拉菜单 */
+  header.site-header-cn .cn-main-menu > li > .vmegamenu {
+    top: 100% !important;
+    left: -14px !important;
+    min-width: 196px !important;
+    padding: 8px !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-top: 2px solid #2596d1 !important;
+    border-radius: 0 0 8px 8px !important;
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12) !important;
+  }
+
+  header.site-header-cn .cn-main-menu > li > .vmegamenu li {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  header.site-header-cn .cn-main-menu > li > .vmegamenu li a.title {
+    display: block !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #334155 !important;
+    line-height: 1.45 !important;
+    white-space: nowrap;
+    transition: background-color 0.18s ease, color 0.18s ease, padding-left 0.18s ease;
+  }
+
+  header.site-header-cn .cn-main-menu > li > .vmegamenu li a.title:hover {
+    background-color: #f0f9ff !important;
+    color: #2596d1 !important;
+    padding-left: 16px !important;
+  }
+
+  /* 右侧搜索图标 + 获取报价按钮 */
+  header.site-header-cn .cn-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  header.site-header-cn .search_box {
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  header.site-header-cn .cn-search-btn {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: #f1f5f9 !important;
+    color: #334155 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  header.site-header-cn .cn-search-btn:hover {
+    background: #e0f2fe !important;
+    color: #2596d1 !important;
+  }
+
+  header.site-header-cn .cn-quote-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 36px !important;
+    padding: 0 20px !important;
+    border-radius: 18px !important;
+    background: linear-gradient(135deg, #2596d1 0%, #1a7bb9 100%) !important;
+    color: #ffffff !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em;
+    white-space: nowrap !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 12px rgba(37, 150, 209, 0.26);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+
+  header.site-header-cn .cn-quote-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(37, 150, 209, 0.36);
+    filter: brightness(1.04);
+    color: #ffffff !important;
+  }
+
+  /* 精确匹配新导航栏高度，防止下方 Banner 被遮挡或留白过多 */
+  body > .height {
+    height: 98px !important;
+  }
+
+  /* 中等桌面屏幕自适应（1024px ~ 1200px） */
+  @media (max-width: 1200px) {
+    header.site-header-cn .cn-header-inner {
+      padding: 8px 16px !important;
+      gap: 16px !important;
+    }
+    header.site-header-cn .cn-brand img {
+      height: 50px !important;
+    }
+    header.site-header-cn .cn-main-menu {
+      gap: 16px !important;
+    }
+    header.site-header-cn .cn-main-menu > li > a {
+      font-size: 14.5px !important;
+    }
+    header.site-header-cn .cn-quote-btn {
+      padding: 0 14px !important;
+      font-size: 13.5px !important;
+    }
+  }
+
+  /* 平板及手机端适配（<= 991px） */
+  @media (max-width: 991px) {
+    header.site-header-cn .cn-header-inner {
+      padding: 10px 56px 10px 16px !important;
+    }
+    header.site-header-cn .cn-brand img,
+    header.site-header-cn.small .cn-brand img {
+      height: 40px !important;
+    }
+    header.site-header-cn .cn-top-bar,
+    header.site-header-cn .cn-quote-btn {
+      display: none !important;
+    }
+    header.site-header-cn .cn-main-bar {
+      width: auto !important;
+      gap: 8px !important;
+    }
+    body > .height {
+      height: 62px !important;
+    }
+  }
+</style>
