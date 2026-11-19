@@ -152,7 +152,7 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
 
 <style is:global>
   /* =========================================================
-     宏晟光伏中文站 - 极简无箭头导航栏 + 380x114 LOGO
+     宏晟光伏中文站 - 现代极简导航栏 + 380x114 LOGO
      ========================================================= */
   header.site-header-cn,
   header.site-header-cn.large,
@@ -167,6 +167,13 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
     border-bottom: 1px solid #e5e7eb !important;
     transition: all 0.25s ease;
     z-index: 999 !important;
+  }
+
+  /* 彻底禁止导航栏内任何链接出现浏览器或 Bootstrap 默认下划线 */
+  header.site-header-cn a,
+  header.site-header-cn a:hover,
+  header.site-header-cn a:focus {
+    text-decoration: none !important;
   }
 
   header.site-header-cn .header {
@@ -237,7 +244,7 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
     padding: 0 !important;
   }
 
-  /* 上排：热线 + 辅助导航（统一右对齐收紧） */
+  /* 上排：热线 + 辅助导航 */
   header.site-header-cn .cn-top-bar {
     float: none !important;
     width: auto !important;
@@ -246,7 +253,7 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
     justify-content: flex-end !important;
     gap: 16px !important;
     padding: 0 0 7px 0 !important;
-    margin: 0 0 6px 0 !important;
+    margin: 0 0 2px 0 !important;
     border-bottom: 1px solid #f1f5f9 !important;
   }
 
@@ -257,7 +264,6 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
     font-size: 13px !important;
     font-weight: 600 !important;
     color: #2596d1 !important;
-    text-decoration: none !important;
     white-space: nowrap;
   }
 
@@ -325,7 +331,7 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
     display: flex !important;
     align-items: center !important;
     justify-content: flex-end !important;
-    gap: 28px !important;
+    gap: 24px !important;
     padding: 0 !important;
     margin: 0 !important;
   }
@@ -342,7 +348,7 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
     display: flex !important;
     align-items: center !important;
     justify-content: flex-end !important;
-    gap: 32px !important;
+    gap: 6px !important;
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -351,14 +357,15 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
     position: relative;
     float: none !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 5px 0 !important;
     background: none !important;
   }
 
-  /* 彻底清除原站 style.css 遗留的下拉箭头伪元素与背景图 */
+  /* 彻底清除原站下拉箭头及所有伪元素横线 */
   header.site-header-cn .cn-main-menu > li::before,
   header.site-header-cn .cn-main-menu > li::after,
-  header.site-header-cn .cn-main-menu > li > a::before {
+  header.site-header-cn .cn-main-menu > li > a::before,
+  header.site-header-cn .cn-main-menu > li > a::after {
     content: none !important;
     display: none !important;
     background: none !important;
@@ -366,53 +373,34 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
   }
 
   header.site-header-cn .cn-main-menu > li > a {
-    position: relative;
     display: inline-block !important;
-    padding: 8px 2px 10px 2px !important;
+    padding: 7px 14px !important;
+    border-radius: 8px !important;
     font-size: 15.5px !important;
     font-weight: 600 !important;
     color: #1e293b !important;
     line-height: 1.4 !important;
     white-space: nowrap !important;
-    background: none !important;
-    transition: color 0.2s ease;
+    background-color: transparent !important;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  /* 悬停底部滑动蓝线 */
-  header.site-header-cn .cn-main-menu > li > a::after {
-    content: '' !important;
-    display: block !important;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 2.5px;
-    background: #2596d1;
-    border-radius: 2px;
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.22s ease;
-  }
-
+  /* 悬停效果：柔和浅蓝圆角背景 + 品牌蓝文字 */
   header.site-header-cn .cn-main-menu > li:hover > a {
+    background-color: #f0f9ff !important;
     color: #2596d1 !important;
   }
 
-  header.site-header-cn .cn-main-menu > li:hover > a::after {
-    transform: scaleX(1);
-  }
-
-  /* 现代极简悬浮下拉卡片（去除旧式生硬横线） */
+  /* 现代悬浮圆角白卡下拉菜单（无生硬顶部蓝线） */
   header.site-header-cn .cn-main-menu > li > .vmegamenu {
     top: 100% !important;
-    left: -16px !important;
-    min-width: 196px !important;
+    left: 0 !important;
+    min-width: 192px !important;
     padding: 8px !important;
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
-    border-top: 2px solid #2596d1 !important;
-    border-radius: 0 0 10px 10px !important;
-    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1) !important;
   }
 
   header.site-header-cn .cn-main-menu > li > .vmegamenu li {
@@ -488,7 +476,6 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
     font-weight: 600 !important;
     letter-spacing: 0.02em;
     white-space: nowrap !important;
-    text-decoration: none !important;
     box-shadow: 0 4px 12px rgba(37, 150, 209, 0.24);
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   }
@@ -513,9 +500,10 @@ import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
       height: 50px !important;
     }
     header.site-header-cn .cn-main-menu {
-      gap: 20px !important;
+      gap: 2px !important;
     }
     header.site-header-cn .cn-main-menu > li > a {
+      padding: 6px 10px !important;
       font-size: 14.5px !important;
     }
     header.site-header-cn .cn-quote-btn {
