@@ -19,7 +19,7 @@ const latestThreeNews = allNews
       <div class="foot_left">
         <div class="bottom_logo">
           <picture>
-            <img class="img" width="150" src={SITE.logoLight} alt="宏晟光伏徽标" />
+            <img class="img" width="150" height="45" src={SITE.logoLight} alt="宏晟光伏徽标" loading="lazy" decoding="async" />
           </picture>
         </div>
         <div class="text">
@@ -30,15 +30,15 @@ const latestThreeNews = allNews
       <div class="foot_right">
         <ul>
           <li>
-            <img src="/Public/theme/default/picture/tel.png" alt="电话" />
+            <img src="/Public/theme/default/picture/tel.png" alt="电话" loading="lazy" decoding="async" />
             <a rel="nofollow" href={`Tel:${SITE.phone}`}>电话 : {SITE.phone}</a>
           </li>
           <li>
-            <img src="/Public/theme/default/picture/mail.png" alt="邮箱" />
+            <img src="/Public/theme/default/picture/mail.png" alt="邮箱" loading="lazy" decoding="async" />
             <a rel="nofollow" target="_blank" href={`mailto:${SITE.email}`}>邮箱 : {SITE.email}</a>
           </li>
           <li>
-            <img src="/Public/theme/default/picture/add.png" alt="地址" />
+            <img src="/Public/theme/default/picture/add.png" alt="地址" loading="lazy" decoding="async" />
             <span>地址 : {SITE.address}</span>
           </li>
         </ul>
@@ -59,14 +59,14 @@ const latestThreeNews = allNews
             <input
               name="email"
               id="user_email"
-              type="text"
+              type="email"
               placeholder="您的电子邮箱"
               lay-verify="required|email"
               lay-reqText="请输入有效的电子邮箱"
             />
             <input name="message" type="hidden" value="中文站网页底部左下角订阅留资" />
-            <button type="button" lay-submit lay-filter="send">
-              <img src="/Public/theme/default/picture/send.png" alt="发送" />
+            <button type="submit" lay-submit lay-filter="send" aria-label="订阅">
+              <img src="/Public/theme/default/picture/send.png" alt="发送" loading="lazy" decoding="async" />
             </button>
           </form>
         </div>
@@ -112,20 +112,22 @@ const latestThreeNews = allNews
     <div class="container clearfix">
       <div class="footer_nav">
         {SITE.copyright}
-        <img src="/Public/theme/default/picture/ipv6.png" alt="IPv6" /> 支持 IPv6 网络
+        <img src="/Public/theme/default/picture/ipv6.png" alt="IPv6" loading="lazy" decoding="async" /> 支持 IPv6 网络
       </div>
       <div class="links">
         <a href="/privacy-policy.html">隐私政策</a>
       </div>
     </div>
-    <div class="container clearfix">
-      <div class="footer-links" style="margin:20px 0 0 0">
-        <p>友情链接：</p>
-        {SITE.friendlyLinks.map((link) => (
-          <a target="_blank" rel="noopener" href={link.href}>{link.name}</a>
-        ))}
+    {SITE.friendlyLinks && SITE.friendlyLinks.length > 0 && (
+      <div class="container clearfix">
+        <div class="footer-links" style="margin:20px 0 0 0">
+          <p>友情链接：</p>
+          {SITE.friendlyLinks.map((link) => (
+            <a target="_blank" rel="noopener" href={link.href}>{link.name}</a>
+          ))}
+        </div>
       </div>
-    </div>
+    )}
   </div>
 </div>
 
@@ -136,7 +138,7 @@ const latestThreeNews = allNews
   <div id="online_qq_tab">
     <a id="floatShow" rel="nofollow" href="javascript:void(0);">
       <div class="livechat-girl animated">
-        <img class="girl" src="/Public/theme/default/picture/en_3.png" alt="在线咨询" />
+        <img class="girl" src="/Public/theme/default/picture/en_3.png" alt="在线咨询" loading="lazy" decoding="async" />
         <div class="animated-circles">
           <div class="circle c-1"></div>
           <div class="circle c-2"></div>
@@ -155,20 +157,18 @@ const latestThreeNews = allNews
           如果您对我们的太阳能产品感兴趣，想了解更多详情并获得我们的报价，请在这里留言，我们将在 12 小时内回复您。
         </div>
         <div class="inquiry">
-          <form method="post" id="floatingForm" class="layui-form" action="">
+          <form method="post" id="floatingForm" class="layui-form">
             <input type="hidden" name="access_key" value={SITE.web3formsKey} />
             <input type="hidden" name="subject" value="[宏晟光伏中文站] 右侧悬浮窗询盘" />
             <input type="hidden" name="from_name" value="宏晟光伏中文官网" />
             <div class="input-group">
               <span class="ms_e">
                 <input
-                  lay-verType="tips"
                   lay-verify="required|email"
                   lay-reqText="请输入有效的电子邮箱"
                   class="form-control"
                   name="email"
-                  tabindex="10"
-                  type="text"
+                  type="email"
                   placeholder="您的电子邮箱 *"
                 />
               </span>
@@ -178,7 +178,6 @@ const latestThreeNews = allNews
                 <input
                   class="form-control"
                   name="phone"
-                  tabindex="10"
                   type="text"
                   placeholder="电话 / 微信"
                 />
@@ -187,17 +186,15 @@ const latestThreeNews = allNews
             <div class="input-group">
               <span class="ms_m">
                 <textarea
-                  lay-verType="tips"
                   lay-verify="required"
                   lay-reqText="请输入您的询价详情"
                   name="message"
                   class="form-control"
-                  tabindex="13"
                   placeholder="输入您的询价详情（如产品型号、功率、数量及安装地区等），以获得准确报价 *"
                 ></textarea>
               </span>
             </div>
-            <button type="button" lay-submit lay-filter="contact" class="main_more">提交</button>
+            <button type="submit" lay-submit lay-filter="contact" class="main_more">提交</button>
           </form>
         </div>
       </div>
@@ -225,7 +222,7 @@ const latestThreeNews = allNews
         <i class="icon"></i>
         <a>
           <p>扫描至微信:</p>
-          <img src={SITE.wechatQr} alt="微信二维码" />
+          <img src={SITE.wechatQr} alt="微信二维码" loading="lazy" decoding="async" />
         </a>
       </div>
     </li>
@@ -288,43 +285,133 @@ const latestThreeNews = allNews
   #footer .footer-links a {
     margin-right: 16px;
   }
+  /* 轻量级中文弹窗，替代 Layui layer.alert */
+  .hs-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .hs-modal-box {
+    background: #fff;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    padding: 24px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.22);
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  .hs-modal-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 10px;
+  }
+  .hs-modal-msg {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #475569;
+    margin: 0 0 20px;
+  }
+  .hs-modal-btn {
+    background: #2596d1;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    padding: 8px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .hs-modal-btn:hover {
+    background: #1a7bb9;
+  }
 </style>
 
-<script is:inline type="text/javascript" src="/Public/layui/layui.js"></script>
-<script is:inline type="text/javascript" src="/Public/theme/default/js/bootstrap.min.js"></script>
-<script is:inline type="text/javascript" src="/Public/theme/default/js/swiper.min.js"></script>
-<script is:inline type="text/javascript" src="/Public/theme/default/js/main.js"></script>
-<script is:inline type="text/javascript" src="/Public/theme/default/js/demo.js"></script>
-<script is:inline type="text/javascript" src="/Public/theme/default/js/slick_a.min.js"></script>
-<script is:inline type="text/javascript" src="/Public/theme/default/js/app.js"></script>
+<!-- 仅保留 3 个核心交互脚本并统一加 defer -->
+<script is:inline defer src="/Public/theme/default/js/swiper.min.js"></script>
+<script is:inline defer src="/Public/theme/default/js/main.js"></script>
+<script is:inline defer src="/Public/theme/default/js/demo.js"></script>
 
 <script is:inline>
-  if (document.querySelector('#pro_img_gallery')) {
-    new Swiper('#pro_img_gallery', {
-      autoHeight: true,
-      effect: 'fade',
-      thumbs: {
-        swiper: {
-          el: '#pro_img_thumbs',
-          spaceBetween: 5,
-          slidesPerView: 6,
-          watchSlidesVisibility: true,
+  document.addEventListener('DOMContentLoaded', function () {
+    // 产品详情页相册初始化
+    if (document.querySelector('#pro_img_gallery') && typeof Swiper !== 'undefined') {
+      new Swiper('#pro_img_gallery', {
+        autoHeight: true,
+        effect: 'fade',
+        thumbs: {
+          swiper: {
+            el: '#pro_img_thumbs',
+            spaceBetween: 5,
+            slidesPerView: 6,
+            watchSlidesVisibility: true,
+          },
+          autoScrollOffset: 1,
         },
-        autoScrollOffset: 1,
-      },
-    });
-  }
-
-  layui.use(function () {
-    var form = layui.form,
-      layer = layui.layer;
-
-    function submitInquiry(fields, successMsg, formEl) {
-      var loadIdx = layer.load(1, { shade: 0.3 });
-      var payload = Object.assign({}, fields, {
-        source_page: window.location.href,
-        botcheck: false,
       });
+    }
+
+    function showModal(title, htmlMsg) {
+      var old = document.getElementById('hs-inquiry-modal');
+      if (old) old.remove();
+      var backdrop = document.createElement('div');
+      backdrop.id = 'hs-inquiry-modal';
+      backdrop.className = 'hs-modal-backdrop';
+      backdrop.innerHTML =
+        '<div class="hs-modal-box">' +
+          '<div class="hs-modal-title">' + title + '</div>' +
+          '<div class="hs-modal-msg">' + htmlMsg + '</div>' +
+          '<button type="button" class="hs-modal-btn">确定</button>' +
+        '</div>';
+      backdrop.addEventListener('click', function (e) {
+        if (e.target === backdrop || e.target.classList.contains('hs-modal-btn')) {
+          backdrop.remove();
+        }
+      });
+      document.body.appendChild(backdrop);
+    }
+
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function validateForm(formEl) {
+      var fields = formEl.querySelectorAll('[lay-verify]');
+      for (var i = 0; i < fields.length; i++) {
+        var el = fields[i];
+        var rules = (el.getAttribute('lay-verify') || '').split('|');
+        var val = (el.value || '').trim();
+        var reqMsg = el.getAttribute('lay-reqText') || '请填写必填项。';
+        if (rules.indexOf('required') !== -1 && !val) {
+          showModal('提示', reqMsg);
+          el.focus();
+          return false;
+        }
+        if (rules.indexOf('email') !== -1 && val && !emailRegex.test(val)) {
+          showModal('提示', reqMsg);
+          el.focus();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function handleWeb3Form(formEl, filterType, triggerBtn) {
+      if (!validateForm(formEl)) return;
+
+      var formData = new FormData(formEl);
+      var payload = { source_page: window.location.href, botcheck: false };
+      formData.forEach(function (v, k) { payload[k] = v; });
+
+      var origHtml = triggerBtn ? triggerBtn.innerHTML : '';
+      if (triggerBtn) {
+        triggerBtn.disabled = true;
+        if (filterType !== 'send') triggerBtn.textContent = '提交中...';
+      }
 
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -340,65 +427,47 @@ const latestThreeNews = allNews
           });
         })
         .then(function (result) {
-          layer.close(loadIdx);
           if (result.ok && result.json && result.json.success) {
-            if (formEl) formEl.reset();
-            layer.alert(successMsg, {
-              title: '提交成功',
-              btn: ['确定'],
-              shade: 0.5,
-              icon: 1,
-            });
+            formEl.reset();
+            var successMsg =
+              filterType === 'send'
+                ? '感谢您的关注！'
+                : '您的留言已成功提交！<br>我们将尽快安排销售专员与您联系！';
+            showModal('提交成功', successMsg);
           } else {
             var errMsg =
               result.json && result.json.message
                 ? result.json.message
                 : '提交失败，请直接发送邮件至 info@hssolar.com 或致电 13905633017。';
-            layer.alert(errMsg, {
-              title: '提交失败',
-              btn: ['确定'],
-              shade: 0.5,
-              icon: 2,
-            });
+            showModal('提交失败', errMsg);
           }
         })
         .catch(function () {
-          layer.close(loadIdx);
-          layer.alert('网络异常，请稍后重试或直接致电 13905633017。', {
-            title: '提交失败',
-            btn: ['确定'],
-            shade: 0.5,
-            icon: 2,
-          });
+          showModal('提交失败', '网络异常，请稍后重试或直接致电 13905633017。');
+        })
+        .finally(function () {
+          if (triggerBtn) {
+            triggerBtn.disabled = false;
+            if (filterType !== 'send') triggerBtn.innerHTML = origHtml;
+          }
         });
     }
 
-    form.on('submit(contact)', function (data) {
-      submitInquiry(
-        data.field,
-        '您的留言已成功提交！<br>我们将尽快安排销售专员与您联系！',
-        data.form
-      );
-      return false;
-    });
+    document.querySelectorAll('form.layui-form').forEach(function (formEl) {
+      var btn = formEl.querySelector('[lay-submit]');
+      if (!btn) return;
+      var filterType = btn.getAttribute('lay-filter') || 'contact';
 
-    form.on('submit(send)', function (data) {
-      submitInquiry(data.field, '感谢您的关注！', data.form);
-      return false;
-    });
-  });
-</script>
+      formEl.addEventListener('submit', function (e) {
+        e.preventDefault();
+        handleWeb3Form(formEl, filterType, btn);
+      });
 
-{isHome && (
-  <script is:inline type="text/javascript">
-    $('.ewt-fade-in').each(function () {
-      if (this.complete) {
-        $(this).addClass('loaded');
-      } else {
-        $(this).on('load', function () {
-          $(this).addClass('loaded');
+      if (btn.getAttribute('type') === 'button') {
+        btn.addEventListener('click', function () {
+          handleWeb3Form(formEl, filterType, btn);
         });
       }
     });
-  </script>
-)}
+  });
+</script>

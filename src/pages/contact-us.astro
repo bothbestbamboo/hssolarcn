@@ -2,16 +2,19 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import InnerBanner from '../components/InnerBanner.astro';
 import { SITE } from '../data/site';
+
+const CONTACT_BANNER = '/Public/theme/default/image/contact-us.jpg';
 ---
 
 <BaseLayout
   title="联系我们 - 宏晟光伏: 太阳能板与光伏板的生产厂家"
   description="联系宏晟光伏获取太阳能板、N型TOPCon与HJT光伏组件、逆变器及储能系统厂家直销报价。"
   keywords="联系宏晟光伏, 太阳能板厂家, 光伏板报价"
+  preloadImage={CONTACT_BANNER}
 >
   <InnerBanner
     title="联系我们"
-    bannerImg="/Public/theme/default/image/contact-us.jpg"
+    bannerImg={CONTACT_BANNER}
     bannerAlt="联系我们"
     breadcrumbs={[{ label: '联系我们' }]}
   />
@@ -74,12 +77,7 @@ import { SITE } from '../data/site';
                 <div class="text">
                   如果您对我们的太阳能产品感兴趣，想了解更多细节并获得我们的报价，请在此处留言，我们将在 12 小时内回复您。
                 </div>
-                <form
-                  class="layui-form"
-                  method="post"
-                  id="contactPageForm"
-                  action="javascript:;"
-                >
+                <form class="layui-form" method="post" id="contactPageForm">
                   <input type="hidden" name="access_key" value={SITE.web3formsKey} />
                   <input
                     type="hidden"
@@ -92,10 +90,9 @@ import { SITE } from '../data/site';
                     <li>
                       <span class="ms_e">
                         <input
-                          lay-verType="tips"
                           lay-verify="required|email"
                           lay-reqText="请输入有效的电子邮箱"
-                          type="text"
+                          type="email"
                           name="email"
                           class="meInput"
                           placeholder="您的电子邮箱 *"
@@ -115,7 +112,6 @@ import { SITE } from '../data/site';
                     <li>
                       <span class="ms_m">
                         <textarea
-                          lay-verType="tips"
                           lay-verify="required"
                           lay-reqText="请输入您的询价详情"
                           placeholder="输入您的询价详情（如产品型号、功率、数量及安装地区等），以获得准确的报价 *"
@@ -126,7 +122,7 @@ import { SITE } from '../data/site';
                     </li>
                     <div class="clearfix"></div>
                   </ul>
-                  <button class="send_btn" lay-submit lay-filter="contact" type="button">
+                  <button class="send_btn" lay-submit lay-filter="contact" type="submit">
                     提交留言
                   </button>
                 </form>
@@ -144,6 +140,8 @@ import { SITE } from '../data/site';
                           <img
                             src="/Public/theme/default/picture/contact-1.jpg"
                             alt="客户需求"
+                            loading="lazy"
+                            decoding="async"
                           />
                         </a>
                         <div class="wrap">
@@ -160,6 +158,8 @@ import { SITE } from '../data/site';
                           <img
                             src="/Public/theme/default/picture/contact-2.jpg"
                             alt="技术支持"
+                            loading="lazy"
+                            decoding="async"
                           />
                         </a>
                         <div class="wrap">
@@ -176,6 +176,8 @@ import { SITE } from '../data/site';
                           <img
                             src="/Public/theme/default/picture/contact-3.jpg"
                             alt="售后服务"
+                            loading="lazy"
+                            decoding="async"
                           />
                         </a>
                         <div class="wrap">

@@ -33,6 +33,11 @@ const latestNews = allNews
     return timeDiff !== 0 ? timeDiff : b.data.id - a.data.id;
   })
   .slice(0, 3);
+
+const banners = [
+  { src: '/Uploads/images/20241119/673c9f32ace84.jpg', alt: '宏晟光伏高效太阳能板生产厂家' },
+  { src: '/Uploads/images/20241119/673c9f55de2e1.jpg', alt: '宏晟光伏一站式光储系统解决方案' },
+];
 ---
 
 <BaseLayout
@@ -40,30 +45,32 @@ const latestNews = allNews
   description={SITE.description}
   keywords={SITE.keywords}
   isHome={true}
+  preloadImage={banners[0].src}
 >
   <div class="height"></div>
 
-  <!-- 首页轮播 Banner -->
+  <!-- 首页轮播 Banner：重裁为 1920x720 后，将下方 height="970" 同步改为 height="720" -->
   <div class="swiper-banner index_banner">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <div class="slide-inner">
-          <a href="/">
-            <picture>
-              <img src="/Uploads/images/20241119/673c9f32ace84.jpg" alt="宏晟光伏横幅" />
-            </picture>
-          </a>
+      {banners.map((banner, idx) => (
+        <div class="swiper-slide">
+          <div class="slide-inner">
+            <a href="/">
+              <picture>
+                <img
+                  src={banner.src}
+                  alt={banner.alt}
+                  width="1920"
+                  height="970"
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={idx === 0 ? 'high' : 'low'}
+                  decoding="async"
+                />
+              </picture>
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="slide-inner">
-          <a href="/">
-            <picture>
-              <img src="/Uploads/images/20241119/673c9f55de2e1.jpg" alt="宏晟光伏横幅" />
-            </picture>
-          </a>
-        </div>
-      </div>
+      ))}
     </div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
@@ -84,7 +91,12 @@ const latestNews = allNews
                 <div class="moudle">
                   <a href={`/product-detail-${item.data.id}.html`} class="images">
                     <picture>
-                      <img src={item.data.image} alt={item.data.title} />
+                      <img
+                        src={item.data.image}
+                        alt={item.data.title}
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </picture>
                   </a>
                   <a href={`/product-detail-${item.data.id}.html`} class="title">
@@ -115,6 +127,8 @@ const latestNews = allNews
                 class="img"
                 src="/Public/theme/default/picture/1721045333_3vVNWtUjmd.png"
                 alt="高性能、实惠的价格"
+                loading="lazy"
+                decoding="async"
               />
             </picture>
           </a>
@@ -133,6 +147,8 @@ const latestNews = allNews
                 class="img"
                 src="/Public/theme/default/picture/1721095476_ZCdp1MpELP.png"
                 alt="重新思考质量"
+                loading="lazy"
+                decoding="async"
               />
             </picture>
           </a>
@@ -151,6 +167,8 @@ const latestNews = allNews
                 class="img"
                 src="/Public/theme/default/picture/1721808780_1USSy0dTM9.png"
                 alt="技术专长"
+                loading="lazy"
+                decoding="async"
               />
             </picture>
           </a>
@@ -169,6 +187,8 @@ const latestNews = allNews
                 class="img"
                 src="/Public/theme/default/picture/1721095611_eUbkVjMtB9.png"
                 alt="强大的社会责任公司"
+                loading="lazy"
+                decoding="async"
               />
             </picture>
           </a>
@@ -196,7 +216,12 @@ const latestNews = allNews
               <div class="moudle">
                 <a href={`/news-${item.data.id}.html`} class="images">
                   <picture>
-                    <img src={item.data.image} alt={item.data.title} />
+                    <img
+                      src={item.data.image}
+                      alt={item.data.title}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </picture>
                 </a>
                 <div class="wrap">
@@ -229,7 +254,12 @@ const latestNews = allNews
           <li>
             <a href={`/news-${item.data.id}.html`} class="images">
               <picture>
-                <img src={item.data.image} alt={item.data.title} />
+                <img
+                  src={item.data.image}
+                  alt={item.data.title}
+                  loading="lazy"
+                  decoding="async"
+                />
               </picture>
             </a>
             <div class="ovrly"></div>
@@ -265,7 +295,13 @@ const latestNews = allNews
               <div class="wrap">
                 <a href={`/news-${item.data.id}.html`} class="images">
                   <picture>
-                    <img class="img" src={item.data.image} alt={item.data.title} />
+                    <img
+                      class="img"
+                      src={item.data.image}
+                      alt={item.data.title}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </picture>
                 </a>
                 <div class="text">
@@ -291,7 +327,12 @@ const latestNews = allNews
               <div class="moudle">
                 <a href={`/news-${item.data.id}.html`} class="images">
                   <picture>
-                    <img src={item.data.image} alt={item.data.title} />
+                    <img
+                      src={item.data.image}
+                      alt={item.data.title}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </picture>
                 </a>
                 <div class="wrap">
@@ -300,7 +341,7 @@ const latestNews = allNews
                   <div class="text">{item.data.summary}</div>
                   <div class="more">
                     <a href={`/news-${item.data.id}.html`}>
-                      查看更多 <img src="/Public/theme/default/picture/arrow.png" alt="" />
+                      查看更多 <img src="/Public/theme/default/picture/arrow.png" alt="" loading="lazy" decoding="async" />
                     </a>
                   </div>
                 </div>
@@ -311,6 +352,4 @@ const latestNews = allNews
       </div>
     </div>
   </div>
-
-  <div class="video_content clearfix"></div>
 </BaseLayout>
