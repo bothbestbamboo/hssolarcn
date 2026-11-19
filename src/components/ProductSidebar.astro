@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import { getTopCategories, getSubCategories } from '../data/categories';
+
+interface Props {
+  activeCategoryId?: number;
+}
+
+const { activeCategoryId } = Astro.props;
+const topCategories = getTopCategories();
+
+const newProducts = (await getCollection('products'))
+  .sort((a, b) => b.data.id - a.data.id)
+  .slice(0, 5);
+---
+
+<div class="left_fixed">
+  <div class="left_fixed_box">
+    <div id="main" class="n_left penci-main-sticky-sidebar">
+      <div class="theiaStickySidebar">
+        <div class="modules">
+          <section class="block left_nav">
+            <div class="unfold nav_h4">产品分类</div>
+            <div class="toggle_content clearfix">
+              <ul class="mtree">
+                {topCategories.map((top) => {
+                  const subs = getSubCategories(top.id);
+                  const isTopActive =
+                    activeCategoryId === top.id ||
+                    subs.some((s) => s.id === activeCategoryId);
+                  return (
+                    <li class={`clearfix ${isTopActive ? 'mtree-open active' : ''}`}>
+                      <span></span>
+                      <a href={`/category-${top.id}.html`}>{top.name}</a>
+                      {subs.length > 0 && (
+                        <ul>
+                          {subs.map((sub) => (
+                            <li class={activeCategoryId === sub.id ? 'active' : ''}>
+                              <span></span>
+                              <a href={`/category-${sub.id}.html`}>{sub.name}</a>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <script is:inline src="/Public/theme/default/js/mtree.js"></script>
+          </section>
+
+          <section class="block hot_left">
+            <h4 class="left_h4">最新产品</h4>
+            <div class="toggle_content clearfix">
+              <ul>
+                {newProducts.map((item) => (
+                  <li>
+                    <div class="li clearfix">
+                      <a class="img" href={`/product-detail-${item.data.id}.html`}>
+                        <img src={item.data.image} alt={item.data.title} />
+                      </a>
+                      <div class="h4">
+                        <a href={`/product-detail-${item.data.id}.html`}>{item.data.title}</a>
+                      </div>
+                      <a
+                        rel="nofollow"
+                        href={`/product-detail-${item.data.id}.html`}
+                        class="more"
+                      >
+                        阅读更多 <i class="fa fa-caret-right"></i>
+                      </a>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

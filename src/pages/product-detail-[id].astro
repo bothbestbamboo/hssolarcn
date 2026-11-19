@@ -1,0 +1,158 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InnerBanner from '../components/InnerBanner.astro';
+import ProductSidebar from '../components/ProductSidebar.astro';
+import { CATEGORIES } from '../data/categories';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map((product) => ({
+    params: { id: String(product.data.id) },
+    props: { product, allProducts: products },
+  }));
+}
+
+const { product, allProducts } = Astro.props;
+const { Content } = await render(product);
+
+const gallery = product.data.gallery?.length
+  ? product.data.gallery
+  : [product.data.image];
+
+const primaryCatId = product.data.categoryIds?.[0];
+const primaryCat = CATEGORIES.find((c) => c.id === primaryCatId);
+const activeSubCatId =
+  product.data.categoryIds?.find((cid: number) => cid !== 1) || primaryCatId;
+
+const relatedProducts = allProducts
+  .filter((p) => p.data.id !== product.data.id)
+  .sort((a, b) => a.data.id - b.data.id)
+  .slice(0, 4);
+---
+
+<BaseLayout
+  title={product.data.seoTitle || `${product.data.title} - 宏晟光伏`}
+  description={product.data.description || product.data.summary || product.data.title}
+  keywords={product.data.keywords || product.data.tags?.join(', ')}
+>
+  <InnerBanner
+    title={primaryCat ? primaryCat.name : '产品详情'}
+    bannerImg={primaryCat?.bannerImg || '/Public/theme/default/picture/1724922438_NrYVWw1adD.png'}
+    breadcrumbs={[
+      { label: '产品中心', href: '/category.html' },
+      ...(primaryCat ? [{ label: primaryCat.name, href: `/category-${primaryCat.id}.html` }] : []),
+      { label: product.data.title },
+    ]}
+  />
+
+  <div class="n_main">
+    <div class="container clearfix">
+      <div class="n_right">
+        <div class="row" style="margin-bottom: 35px;">
+          <div class="col-md-6 col-sm-12" style="margin-bottom: 20px;">
+            <div class="swiper" id="pro_img_gallery" style="border: 1px solid #eee; margin-bottom: 10px; background: #fff;">
+              <div class="swiper-wrapper">
+                {gallery.map((img: string) => (
+                  <div class="swiper-slide">
+                    <img
+                      src={img}
+                      alt={product.data.title}
+                      style="width:100%; height:340px; object-fit:contain; padding: 10px;"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+            {gallery.length > 1 && (
+              <div class="swiper" id="pro_img_thumbs">
+                <div class="swiper-wrapper">
+                  {gallery.map((img: string) => (
+                    <div class="swiper-slide" style="cursor:pointer; border:1px solid #eee; background:#fff;">
+                      <img
+                        src={img}
+                        alt={product.data.title}
+                        style="width:100%; height:60px; object-fit:contain; padding: 4px;"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <h1 style="margin-top: 0; font-size: 24px; font-weight: 700; line-height: 1.4; color: #111827;">
+              {product.data.title}
+            </h1>
+            {product.data.summary && (
+              <p style="font-size: 15px; line-height: 1.75; color: #4b5563; margin: 16px 0;">
+                {product.data.summary}
+              </p>
+            )}
+
+            {product.data.specs && product.data.specs.length > 0 && (
+              <table class="table table-bordered table-striped" style="margin-top: 16px; font-size: 14px;">
+                <tbody>
+                  {product.data.specs.map((spec: { label: string; value: string }) => (
+                    <tr>
+                      <th style="width: 40%;">{spec.label}</th>
+                      <td>{spec.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+
+            <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="/contact-us.html" class="btn btn-primary">现在咨询</a>
+              {product.data.datasheet && (
+                <a href={product.data.datasheet} target="_blank" class="btn btn-default">
+                  资料下载 (PDF)
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading"><strong>产品详情与规格参数</strong></div>
+          <div class="panel-body markdown-body phone" style="padding: 25px;">
+            <Content />
+          </div>
+        </div>
+
+        {relatedProducts.length > 0 && (
+          <div style="margin-top: 40px;">
+            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">相关产品</h3>
+            <div class="row">
+              {relatedProducts.map((item) => (
+                <div class="col-md-3 col-sm-6" style="margin-bottom: 20px;">
+                  <div class="thumbnail" style="height: 100%; border-color: #eee;">
+                    <a href={`/product-detail-${item.data.id}.html`}>
+                      <img
+                        src={item.data.image}
+                        alt={item.data.title}
+                        style="width:100%; height:160px; object-fit:contain; padding:8px;"
+                      />
+                    </a>
+                    <div class="caption">
+                      <a
+                        href={`/product-detail-${item.data.id}.html`}
+                        style="font-size: 13.5px; font-weight: 600; color: #111827; line-height: 1.45; display: block;"
+                      >
+                        {item.data.title}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <ProductSidebar activeCategoryId={activeSubCatId} />
+    </div>
+  </div>
+</BaseLayout>

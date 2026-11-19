@@ -1,0 +1,316 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+
+const allProducts = await getCollection('products');
+const hotProducts = allProducts
+  .filter((p) => p.data.isHot)
+  .sort((a, b) => a.data.id - b.data.id);
+const displayProducts =
+  hotProducts.length > 0
+    ? hotProducts
+    : [...allProducts].sort((a, b) => a.data.id - b.data.id).slice(0, 6);
+
+const allNews = await getCollection('news');
+
+const cases = allNews
+  .filter((n) => n.data.type === 'case' || n.data.type === 'project')
+  .sort((a, b) => a.data.id - b.data.id);
+
+const solutions = allNews
+  .filter((n) => n.data.type === 'solution')
+  .sort((a, b) => a.data.id - b.data.id);
+
+const knowledge = allNews
+  .filter((n) => n.data.type === 'knowledge')
+  .sort((a, b) => a.data.id - b.data.id);
+
+const latestNews = allNews
+  .filter((n) => n.data.type === 'news')
+  .sort((a, b) => {
+    const timeDiff = new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+    return timeDiff !== 0 ? timeDiff : b.data.id - a.data.id;
+  })
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title={SITE.title}
+  description={SITE.description}
+  keywords={SITE.keywords}
+  isHome={true}
+>
+  <div class="height"></div>
+
+  <!-- 首页轮播 Banner -->
+  <div class="swiper-banner index_banner">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="slide-inner">
+          <a href="/">
+            <picture>
+              <img src="/Uploads/images/20241119/673c9f32ace84.jpg" alt="宏晟光伏横幅" />
+            </picture>
+          </a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="slide-inner">
+          <a href="/">
+            <picture>
+              <img src="/Uploads/images/20241119/673c9f55de2e1.jpg" alt="宏晟光伏横幅" />
+            </picture>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <!-- 热门产品 -->
+  <div class="cat_content clearfix">
+    <div class="container clearfix">
+      <div class="maintitle">热门产品</div>
+      <div class="index_text">
+        我们正在为客户服务设定标准。作为领先的太阳能系统供应商，宏晟光伏专注于提供与太阳能相关的优秀产品，从太阳能光伏电池板到太阳能系统。
+      </div>
+      <div class="swiper_box">
+        <div class="swiper pro_scrollbar">
+          <div class="swiper-wrapper">
+            {displayProducts.map((item) => (
+              <div class="swiper-slide">
+                <div class="moudle">
+                  <a href={`/product-detail-${item.data.id}.html`} class="images">
+                    <picture>
+                      <img src={item.data.image} alt={item.data.title} />
+                    </picture>
+                  </a>
+                  <a href={`/product-detail-${item.data.id}.html`} class="title">
+                    {item.data.title}
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+    <div class="more_btn"><a href="/category-31.html">查看更多产品</a></div>
+  </div>
+
+  <!-- 更好的我们 -->
+  <div class="about_content clearfix">
+    <div class="container-big clearfix">
+      <div class="maintitle">更好的我们</div>
+      <div class="index_text">过去 10 年我们如何与众不同</div>
+      <ul class="clearfix">
+        <li>
+          <a class="images">
+            <picture>
+              <img
+                class="img"
+                src="/Public/theme/default/picture/1721045333_3vVNWtUjmd.png"
+                alt="高性能、实惠的价格"
+              />
+            </picture>
+          </a>
+          <div class="wrap">
+            <a class="title">高性能、实惠的价格</a>
+            <div class="text">
+              安装每平方米可产生更多功率的高效模块至关重要。宏晟光伏模块能够产生超过 700W 的峰值 (Wp)，这保证了卓越的性价比。我们为客户案例提供一站式服务，从案例分析、设计到优质元器件供应，为客户提供实惠的价格，让更多人享受到清洁太阳能。
+            </div>
+            <span class="num">01</span>
+          </div>
+        </li>
+        <li>
+          <a class="images">
+            <picture>
+              <img
+                class="img"
+                src="/Public/theme/default/picture/1721095476_ZCdp1MpELP.png"
+                alt="重新思考质量"
+              />
+            </picture>
+          </a>
+          <div class="wrap">
+            <a class="title">重新思考质量</a>
+            <div class="text">
+              为客户提供最好的产品是我们在宏晟新能源所做的一切的关键。对我们而言，这意味着从生产、运输和销售到最终安装的每个阶段都具有高品质。在生产的每个阶段，我们的模块都经过严格的质量控制，并经过 TÜV 和 Intertek 等知名独立机构的检验和认证，确保最高水平的质量。
+            </div>
+            <span class="num">02</span>
+          </div>
+        </li>
+        <li>
+          <a class="images">
+            <picture>
+              <img
+                class="img"
+                src="/Public/theme/default/picture/1721808780_1USSy0dTM9.png"
+                alt="技术专长"
+              />
+            </picture>
+          </a>
+          <div class="wrap">
+            <a class="title">技术专长</a>
+            <div class="text">
+              我们为我们的员工队伍感到自豪，他们由高技能人才组成。我们的制造专业知识首屈一指，我们还提供从模块到逆变器和完整太阳能解决方案的专业技术和客户支持。
+            </div>
+            <span class="num">03</span>
+          </div>
+        </li>
+        <li>
+          <a class="images">
+            <picture>
+              <img
+                class="img"
+                src="/Public/theme/default/picture/1721095611_eUbkVjMtB9.png"
+                alt="强大的社会责任公司"
+              />
+            </picture>
+          </a>
+          <div class="wrap">
+            <a class="title">强大的社会责任公司</a>
+            <div class="text">
+              “品味太阳”，不仅仅是宏晟光伏的口号，更是我们的追求。宏晟每年向当地学校捐赠太阳能系统，赞助青少年足球联赛。我们为中小学生提供太阳能知识启蒙教育。太阳能不仅仅是一项业务，更是地球的未来。
+            </div>
+            <span class="num">04</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 相关案例 -->
+  <div class="case_content clearfix">
+    <div class="container-big clearfix">
+      <div class="maintitle">相关案例</div>
+      <div class="index_text">宏晟光伏作为太阳能龙头企业，项目不断铺开 100 多个国家。</div>
+      <div class="swiper case_scrollbar">
+        <div class="swiper-wrapper">
+          {cases.map((item) => (
+            <div class="swiper-slide">
+              <div class="moudle">
+                <a href={`/news-${item.data.id}.html`} class="images">
+                  <picture>
+                    <img src={item.data.image} alt={item.data.title} />
+                  </picture>
+                </a>
+                <div class="wrap">
+                  <div>
+                    <a href={`/news-${item.data.id}.html`} class="title">{item.data.title}</a>
+                    <div class="text">{item.data.summary}</div>
+                    <div class="more_btn">
+                      <a href={`/news-${item.data.id}.html`}>阅读更多</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 解决方案 -->
+  <div class="solution_content clearfix">
+    <div class="container clearfix">
+      <div class="maintitle">解决方案</div>
+      <div class="index_text">
+        宏晟光伏一直服务于 110 个国家的 2000 多家客户，我们不仅专注于为客户提供高品质的产品，更提供最专业的技术服务。
+      </div>
+      <ul class="clearfix">
+        {solutions.map((item) => (
+          <li>
+            <a href={`/news-${item.data.id}.html`} class="images">
+              <picture>
+                <img src={item.data.image} alt={item.data.title} />
+              </picture>
+            </a>
+            <div class="ovrly"></div>
+            <div class="wrap">
+              <div>
+                <a href={`/news-${item.data.id}.html`} class="title">{item.data.title}</a>
+                <div class="text">{item.data.summary}</div>
+                <div class="more_btn">
+                  <a href={`/news-${item.data.id}.html`}>阅读更多</a>
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <!-- 光伏知识 -->
+  <div class="study_content clearfix">
+    <div class="container clearfix">
+      <div class="wrap">
+        <div class="maintitle">与<span>宏晟光伏</span>一起成为太阳能专家</div>
+        <div class="text">
+          考虑到专业知识，我们创建了太阳能知识中心。在这里，我们探索太阳能的好处、太阳能系统的工作原理、电动汽车等可再生能源创新、离网小贴士、来自世界各地的最新太阳能新闻以及太阳能对我们当地社区的影响方式。
+        </div>
+        <div class="more_btn"><a href="/play-solar.html">阅读更多</a></div>
+      </div>
+      <div class="study_list">
+        <ul>
+          {knowledge.map((item) => (
+            <li>
+              <div class="wrap">
+                <a href={`/news-${item.data.id}.html`} class="images">
+                  <picture>
+                    <img class="img" src={item.data.image} alt={item.data.title} />
+                  </picture>
+                </a>
+                <div class="text">
+                  <a href={`/news-${item.data.id}.html`} class="title">{item.data.title}</a>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 最新新闻 -->
+  <div class="news_content clearfix">
+    <div class="container clearfix">
+      <div class="maintitle">最新新闻</div>
+      <div class="index_text"></div>
+      <div class="swiper scrollbar_news">
+        <div class="swiper-wrapper">
+          {latestNews.map((item) => (
+            <div class="swiper-slide">
+              <div class="moudle">
+                <a href={`/news-${item.data.id}.html`} class="images">
+                  <picture>
+                    <img src={item.data.image} alt={item.data.title} />
+                  </picture>
+                </a>
+                <div class="wrap">
+                  <div class="date">{item.data.date}</div>
+                  <a href={`/news-${item.data.id}.html`} class="title">{item.data.title}</a>
+                  <div class="text">{item.data.summary}</div>
+                  <div class="more">
+                    <a href={`/news-${item.data.id}.html`}>
+                      查看更多 <img src="/Public/theme/default/picture/arrow.png" alt="" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="video_content clearfix"></div>
+</BaseLayout>

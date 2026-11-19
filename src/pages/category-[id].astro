@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InnerBanner from '../components/InnerBanner.astro';
+import ProductSidebar from '../components/ProductSidebar.astro';
+import { CATEGORIES } from '../data/categories';
+
+export async function getStaticPaths() {
+  const allProducts = await getCollection('products');
+
+  return CATEGORIES.map((cat) => {
+    const childIds = CATEGORIES.filter((c) => c.parentId === cat.id).map((c) => c.id);
+    const matchIds = [cat.id, ...childIds];
+
+    const filteredProducts =
+      cat.id === 31
+        ? [...allProducts].sort((a, b) => a.data.id - b.data.id)
+        : allProducts
+            .filter((p) => p.data.categoryIds.some((cid: number) => matchIds.includes(cid)))
+            .sort((a, b) => a.data.id - b.data.id);
+
+    const parentCat = cat.parentId
+      ? CATEGORIES.find((c) => c.id === cat.parentId)
+      : undefined;
+
+    return {
+      params: { id: String(cat.id) },
+      props: { cat, parentCat, products: filteredProducts },
+    };
+  });
+}
+
+const { cat, parentCat, products } = Astro.props;
+
+const breadcrumbs =
+  cat.id === 31
+    ? [{ label: '全部商品' }]
+    : [
+        { label: '产品中心', href: '/category.html' },
+        ...(parentCat ? [{ label: parentCat.name, href: `/category-${parentCat.id}.html` }] : []),
+        { label: cat.name },
+      ];
+---
+
+<BaseLayout
+  title={cat.seoTitle || `${cat.name} - 宏晟光伏: 太阳能板与光伏板的生产厂家`}
+  description={cat.description || `宏晟光伏厂家直销 ${cat.name}，品质保障，欢迎咨询报价。`}
+>
+  <InnerBanner
+    title={cat.name}
+    bannerImg={cat.bannerImg || '/Public/theme/default/picture/product.jpg'}
+    breadcrumbs={breadcrumbs}
+  />
+
+  <div class="n_main">
+    <div class="container clearfix">
+      <div class="n_right">
+        {products.length > 0 ? (
+          <div class="row">
+            {products.map((item) => (
+              <div class="col-md-4 col-sm-6" style="margin-bottom: 30px;">
+                <div class="thumbnail" style="height: 100%; border-color: #eee;">
+                  <a href={`/product-detail-${item.data.id}.html`}>
+                    <img
+                      src={item.data.image}
+                      alt={item.data.title}
+                      style="width:100%; height:220px; object-fit:contain; padding:10px;"
+                    />
+                  </a>
+                  <div class="caption">
+                    <h4 style="font-size: 15px; line-height: 1.5; min-height: 46px;">
+                      <a href={`/product-detail-${item.data.id}.html`} style="color:#333;">
+                        {item.data.title}
+                      </a>
+                    </h4>
+                    <a href={`/product-detail-${item.data.id}.html`} class="btn btn-primary btn-sm">
+                      查看详情
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div style="text-align: center; padding: 80px 0; color: #666; font-size: 15px;">
+            该分类下暂未上架产品，欢迎联系我们获取定制方案...
+          </div>
+        )}
+      </div>
+
+      <ProductSidebar activeCategoryId={cat.id === 31 ? undefined : cat.id} />
+    </div>
+  </div>
+</BaseLayout>

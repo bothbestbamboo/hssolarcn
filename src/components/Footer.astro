@@ -1,0 +1,404 @@
+---
+import { getCollection } from 'astro:content';
+import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
+
+interface Props {
+  isHome?: boolean;
+}
+const { isHome = false } = Astro.props;
+
+const allNews = await getCollection('news', ({ data }) => data.type === 'news');
+const latestThreeNews = allNews
+  .sort((a, b) => b.data.date.localeCompare(a.data.date) || b.data.id - a.data.id)
+  .slice(0, 3);
+---
+
+<div id="footer">
+  <div class="foot_top clearfix">
+    <div class="container clearfix">
+      <div class="foot_left">
+        <div class="bottom_logo">
+          <picture>
+            <img class="img" width="150" src={SITE.logoLight} alt="宏晟光伏徽标" />
+          </picture>
+        </div>
+        <div class="text">
+          当你想“尝尝阳光的味道”时，你会发现宏晟光伏
+          <a href="/contact-us.html">更多</a>
+        </div>
+      </div>
+      <div class="foot_right">
+        <ul>
+          <li>
+            <img src="/Public/theme/default/picture/tel.png" alt="电话" />
+            <a rel="nofollow" href={`Tel:${SITE.phone}`}>电话 : {SITE.phone}</a>
+          </li>
+          <li>
+            <img src="/Public/theme/default/picture/mail.png" alt="邮箱" />
+            <a rel="nofollow" target="_blank" href={`mailto:${SITE.email}`}>邮箱 : {SITE.email}</a>
+          </li>
+          <li>
+            <img src="/Public/theme/default/picture/add.png" alt="地址" />
+            <span>地址 : {SITE.address}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer_list clearfix">
+    <div class="container clearfix">
+      <div class="newsletter">
+        <div class="title_h4">通讯</div>
+        <div class="text">请继续阅读、关注、订阅，欢迎您告诉我们您的想法。</div>
+        <div class="letter_box">
+          <form class="layui-form" id="emailForm">
+            <input type="hidden" name="access_key" value={SITE.web3formsKey} />
+            <input type="hidden" name="subject" value="[宏晟光伏中文站] 页脚邮件订阅" />
+            <input type="hidden" name="from_name" value="宏晟光伏中文官网" />
+            <input
+              name="email"
+              id="user_email"
+              type="text"
+              placeholder="您的电子邮箱"
+              lay-verify="required|email"
+              lay-reqText="请输入有效的电子邮箱"
+            />
+            <input name="message" type="hidden" value="中文站网页底部左下角订阅留资" />
+            <button type="button" lay-submit lay-filter="send">
+              <img src="/Public/theme/default/picture/send.png" alt="发送" />
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <section class="footer_link">
+        <div class="title_h4">支持</div>
+        <ul>
+          <li><a href="/technical-services.html">技术服务</a></li>
+        </ul>
+      </section>
+
+      <section class="footer_pro">
+        <div class="title_h4">产品</div>
+        <ul>
+          {PRODUCT_CATEGORIES.map((cat) => (
+            <li><a href={`/category-${cat.id}.html`}>{cat.name}</a></li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="footer_so">
+        <div class="title_h4">新闻</div>
+        <ul>
+          {latestThreeNews.map((item) => (
+            <li><a href={`/news-${item.data.id}.html`}>{item.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="footer_tags">
+        <div class="title_h4">热门标签</div>
+        <ul>
+          {POPULAR_TAGS.map((tag) => (
+            <li><a href={`/category-tags-${tag.id}.html`}>{tag.name}</a></li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="footer_bottom clearfix">
+    <div class="container clearfix">
+      <div class="footer_nav">
+        {SITE.copyright}
+        <img src="/Public/theme/default/picture/ipv6.png" alt="IPv6" /> 支持 IPv6 网络
+      </div>
+      <div class="links">
+        <a href="/privacy-policy.html">隐私政策</a>
+      </div>
+    </div>
+    <div class="container clearfix">
+      <div class="footer-links" style="margin:20px 0 0 0">
+        <p>友情链接：</p>
+        {SITE.friendlyLinks.map((link) => (
+          <a target="_blank" rel="noopener" href={link.href}>{link.name}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="javascript:;" class="back_top">顶部</a>
+
+<!-- 右下角悬浮询盘窗口 -->
+<div id="online_qq_layer">
+  <div id="online_qq_tab">
+    <a id="floatShow" rel="nofollow" href="javascript:void(0);">
+      <div class="livechat-girl animated">
+        <img class="girl" src="/Public/theme/default/picture/en_3.png" alt="在线咨询" />
+        <div class="animated-circles">
+          <div class="circle c-1"></div>
+          <div class="circle c-2"></div>
+          <div class="circle c-3"></div>
+        </div>
+      </div>
+    </a>
+    <a id="floatHide" rel="nofollow" href="javascript:void(0);"><i></i></a>
+  </div>
+
+  <div id="onlineService">
+    <div class="online_form">
+      <div class="i_message_inquiry">
+        <em class="title">留言</em>
+        <div class="text">
+          如果您对我们的太阳能产品感兴趣，想了解更多详情并获得我们的报价，请在这里留言，我们将在 12 小时内回复您。
+        </div>
+        <div class="inquiry">
+          <form method="post" id="floatingForm" class="layui-form" action="">
+            <input type="hidden" name="access_key" value={SITE.web3formsKey} />
+            <input type="hidden" name="subject" value="[宏晟光伏中文站] 右侧悬浮窗询盘" />
+            <input type="hidden" name="from_name" value="宏晟光伏中文官网" />
+            <div class="input-group">
+              <span class="ms_e">
+                <input
+                  lay-verType="tips"
+                  lay-verify="required|email"
+                  lay-reqText="请输入有效的电子邮箱"
+                  class="form-control"
+                  name="email"
+                  tabindex="10"
+                  type="text"
+                  placeholder="您的电子邮箱 *"
+                />
+              </span>
+            </div>
+            <div class="input-group">
+              <span class="ms_p">
+                <input
+                  class="form-control"
+                  name="phone"
+                  tabindex="10"
+                  type="text"
+                  placeholder="电话 / 微信"
+                />
+              </span>
+            </div>
+            <div class="input-group">
+              <span class="ms_m">
+                <textarea
+                  lay-verType="tips"
+                  lay-verify="required"
+                  lay-reqText="请输入您的询价详情"
+                  name="message"
+                  class="form-control"
+                  tabindex="13"
+                  placeholder="输入您的询价详情（如产品型号、功率、数量及安装地区等），以获得准确报价 *"
+                ></textarea>
+              </span>
+            </div>
+            <button type="button" lay-submit lay-filter="contact" class="main_more">提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 右侧固定联系栏 -->
+<div class="fixed-contact">
+  <ul class="item-list clearfix">
+    <li class="online_p">
+      <div class="column">
+        <i class="icon"></i>
+        <a rel="nofollow" href={`Tel:${SITE.phone}`}>{SITE.phone}</a>
+      </div>
+    </li>
+    <li class="online_e">
+      <div class="column">
+        <i class="icon"></i>
+        <a rel="nofollow" target="_blank" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      </div>
+    </li>
+    <li class="online_code">
+      <div class="column">
+        <i class="icon"></i>
+        <a>
+          <p>扫描至微信:</p>
+          <img src={SITE.wechatQr} alt="微信二维码" />
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- 手机底部导航 -->
+<div class="mobile_nav clearfix">
+  <a href="/">
+    <i style="background-position: -323px -160px"></i>
+    <p>主页</p>
+  </a>
+  <a href="/category.html">
+    <i style="background-position: -366px -160px"></i>
+    <p>产品</p>
+  </a>
+</div>
+
+<style is:global>
+  #footer .letter_box {
+    position: relative;
+    margin-top: 16px;
+  }
+  #footer #emailForm {
+    position: relative !important;
+    width: 100%;
+    max-width: 280px;
+  }
+  #footer #emailForm input[name="email"] {
+    width: 100% !important;
+    height: 44px !important;
+    line-height: 44px !important;
+    padding: 0 48px 0 18px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    border-radius: 22px !important;
+  }
+  #footer #emailForm button {
+    position: absolute !important;
+    right: 14px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer;
+  }
+  #footer #emailForm button img {
+    display: block !important;
+    margin: 0 !important;
+    max-width: 20px;
+    height: auto;
+  }
+  #footer .footer-links a {
+    margin-right: 16px;
+  }
+</style>
+
+<script is:inline type="text/javascript" src="/Public/layui/layui.js"></script>
+<script is:inline type="text/javascript" src="/Public/theme/default/js/bootstrap.min.js"></script>
+<script is:inline type="text/javascript" src="/Public/theme/default/js/swiper.min.js"></script>
+<script is:inline type="text/javascript" src="/Public/theme/default/js/main.js"></script>
+<script is:inline type="text/javascript" src="/Public/theme/default/js/demo.js"></script>
+<script is:inline type="text/javascript" src="/Public/theme/default/js/slick_a.min.js"></script>
+<script is:inline type="text/javascript" src="/Public/theme/default/js/app.js"></script>
+
+<script is:inline>
+  if (document.querySelector('#pro_img_gallery')) {
+    new Swiper('#pro_img_gallery', {
+      autoHeight: true,
+      effect: 'fade',
+      thumbs: {
+        swiper: {
+          el: '#pro_img_thumbs',
+          spaceBetween: 5,
+          slidesPerView: 6,
+          watchSlidesVisibility: true,
+        },
+        autoScrollOffset: 1,
+      },
+    });
+  }
+
+  layui.use(function () {
+    var form = layui.form,
+      layer = layui.layer;
+
+    function submitInquiry(fields, successMsg, formEl) {
+      var loadIdx = layer.load(1, { shade: 0.3 });
+      var payload = Object.assign({}, fields, {
+        source_page: window.location.href,
+        botcheck: false,
+      });
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+        .then(function (res) {
+          return res.json().then(function (json) {
+            return { ok: res.ok, json: json };
+          });
+        })
+        .then(function (result) {
+          layer.close(loadIdx);
+          if (result.ok && result.json && result.json.success) {
+            if (formEl) formEl.reset();
+            layer.alert(successMsg, {
+              title: '提交成功',
+              btn: ['确定'],
+              shade: 0.5,
+              icon: 1,
+            });
+          } else {
+            var errMsg =
+              result.json && result.json.message
+                ? result.json.message
+                : '提交失败，请直接发送邮件至 info@hssolar.com 或致电 13905633017。';
+            layer.alert(errMsg, {
+              title: '提交失败',
+              btn: ['确定'],
+              shade: 0.5,
+              icon: 2,
+            });
+          }
+        })
+        .catch(function () {
+          layer.close(loadIdx);
+          layer.alert('网络异常，请稍后重试或直接致电 13905633017。', {
+            title: '提交失败',
+            btn: ['确定'],
+            shade: 0.5,
+            icon: 2,
+          });
+        });
+    }
+
+    form.on('submit(contact)', function (data) {
+      submitInquiry(
+        data.field,
+        '您的留言已成功提交！<br>我们将尽快安排销售专员与您联系！',
+        data.form
+      );
+      return false;
+    });
+
+    form.on('submit(send)', function (data) {
+      submitInquiry(data.field, '感谢您的关注！', data.form);
+      return false;
+    });
+  });
+</script>
+
+{isHome && (
+  <script is:inline type="text/javascript">
+    $('.ewt-fade-in').each(function () {
+      if (this.complete) {
+        $(this).addClass('loaded');
+      } else {
+        $(this).on('load', function () {
+          $(this).addClass('loaded');
+        });
+      }
+    });
+  </script>
+)}

@@ -1,0 +1,230 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InnerBanner from '../components/InnerBanner.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="联系我们 - 宏晟光伏: 太阳能板与光伏板的生产厂家"
+  description="联系宏晟光伏获取太阳能板、N型TOPCon与HJT光伏组件、逆变器及储能系统厂家直销报价。"
+  keywords="联系宏晟光伏, 太阳能板厂家, 光伏板报价"
+>
+  <InnerBanner
+    title="联系我们"
+    bannerImg="/Public/theme/default/image/contact-us.jpg"
+    bannerAlt="联系我们"
+    breadcrumbs={[{ label: '联系我们' }]}
+  />
+
+  <div class="n_main">
+    <div class="contact_info">
+      <div class="container">
+        <ul class="clearfix">
+          <li class="col-sm-4 col-xs-12 clearfix">
+            <div class="column">
+              <div class="icon">
+                <span style="background-position: -407px -213px;"></span>
+              </div>
+              <div class="wrap">
+                <em>联系电话</em>
+                <p>
+                  电话 : <a rel="nofollow" href={`Tel:${SITE.phone}`}>{SITE.phone}</a>
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="col-sm-4 col-xs-12 clearfix">
+            <div class="column">
+              <div class="icon">
+                <span style="background-position: -335px -212px;"></span>
+              </div>
+              <div class="wrap">
+                <em>电子邮箱</em>
+                <p>
+                  邮箱 :{' '}
+                  <a rel="nofollow" target="_blank" href={`mailto:${SITE.email}`}>
+                    {SITE.email}
+                  </a>
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="col-sm-4 col-xs-12 clearfix">
+            <div class="column">
+              <div class="icon">
+                <span style="background-position: -264px -212px;"></span>
+              </div>
+              <div class="wrap">
+                <em>工厂地址</em>
+                <p>{SITE.address}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="contact">
+        <div class="con_main">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="send_column">
+                <div class="section_title">留言</div>
+                <div class="text">
+                  如果您对我们的太阳能产品感兴趣，想了解更多细节并获得我们的报价，请在此处留言，我们将在 12 小时内回复您。
+                </div>
+                <form
+                  class="layui-form"
+                  method="post"
+                  id="contactPageForm"
+                  action="javascript:;"
+                >
+                  <input type="hidden" name="access_key" value={SITE.web3formsKey} />
+                  <input
+                    type="hidden"
+                    name="subject"
+                    value="[宏晟光伏中文站] 联系我们页面询盘"
+                  />
+                  <input type="hidden" name="from_name" value="宏晟光伏中文官网" />
+
+                  <ul class="clearfix">
+                    <li>
+                      <span class="ms_e">
+                        <input
+                          lay-verType="tips"
+                          lay-verify="required|email"
+                          lay-reqText="请输入有效的电子邮箱"
+                          type="text"
+                          name="email"
+                          class="meInput"
+                          placeholder="您的电子邮箱 *"
+                        />
+                      </span>
+                    </li>
+                    <li>
+                      <span class="ms_p">
+                        <input
+                          type="text"
+                          name="phone"
+                          class="meInput"
+                          placeholder="电话 / 微信"
+                        />
+                      </span>
+                    </li>
+                    <li>
+                      <span class="ms_m">
+                        <textarea
+                          lay-verType="tips"
+                          lay-verify="required"
+                          lay-reqText="请输入您的询价详情"
+                          placeholder="输入您的询价详情（如产品型号、功率、数量及安装地区等），以获得准确的报价 *"
+                          maxlength="3000"
+                          name="message"
+                        ></textarea>
+                      </span>
+                    </li>
+                    <div class="clearfix"></div>
+                  </ul>
+                  <button class="send_btn" lay-submit lay-filter="contact" type="button">
+                    提交留言
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="other page">
+                <div class="section_title">联系我们</div>
+                <div class="det_pic_content clearfix" style="margin-top: 24px;">
+                  <ul id="list_three" class="list">
+                    <li>
+                      <div class="column">
+                        <a class="image" href="/category.html">
+                          <img
+                            src="/Public/theme/default/picture/contact-1.jpg"
+                            alt="客户需求"
+                          />
+                        </a>
+                        <div class="wrap">
+                          <a class="title" href="/category.html">客户需求</a>
+                          <div class="text">
+                            满足客户对太阳能电池、光伏组件、逆变器及储能系统等全系列光伏产品的定制与采购需求。
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="column">
+                        <a class="image" href="/technical-services.html">
+                          <img
+                            src="/Public/theme/default/picture/contact-2.jpg"
+                            alt="技术支持"
+                          />
+                        </a>
+                        <div class="wrap">
+                          <a class="title" href="/technical-services.html">技术支持</a>
+                          <div class="text">
+                            提供专业的技术支持，解答客户关于光伏产品选型、系统设计与安装调试的各类问题。
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="column">
+                        <a class="image" href="/faq.html">
+                          <img
+                            src="/Public/theme/default/picture/contact-3.jpg"
+                            alt="售后服务"
+                          />
+                        </a>
+                        <div class="wrap">
+                          <a class="title" href="/faq.html">售后服务</a>
+                          <div class="text">
+                            提供完善的售后服务体系，包括质保服务、维修、更换及电站运维升级支持。
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .contact .section_title {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+  }
+  .contact_info .wrap em {
+    font-style: normal;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+  }
+  .contact_info .wrap p,
+  .contact_info .wrap p a {
+    font-size: 14.5px !important;
+    color: #4b5563 !important;
+  }
+  #list_three .wrap .title {
+    display: block;
+    font-size: 16.5px !important;
+    font-weight: 700 !important;
+    color: #2596d1 !important;
+    margin-bottom: 6px;
+  }
+  #list_three .wrap .text {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    color: #4b5563 !important;
+    height: auto !important;
+  }
+</style>

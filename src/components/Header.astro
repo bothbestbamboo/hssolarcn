@@ -1,0 +1,136 @@
+---
+import { SITE, PRODUCT_CATEGORIES, POPULAR_TAGS } from '../data/site';
+---
+
+<header class="large">
+  <div class="top-search clearfix">
+    <div class="input-group container">
+      <em>你要买什么？</em>
+      <div class="header_search clearfix">
+        <form action="/category.html" method="get">
+          <input name="labels" type="text" class="form-control" placeholder="搜索产品名称或标签..." />
+          <input type="submit" class="search_btn btn_search1" value="" />
+        </form>
+      </div>
+      <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+      <div class="popular_searches">
+        <div class="search_title">热门搜索</div>
+        <ul class="clearfix">
+          {POPULAR_TAGS.map((tag) => (
+            <li><a href={`/category-tags-${tag.id}.html`}>{tag.name}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="header clearfix">
+    <div class="container-big clearfix">
+      <h1>
+        <a id="logo" href="/"><img src={SITE.logoLight} alt={SITE.title} /></a>
+      </h1>
+      <h1>
+        <a href="/" id="logo1"><img src={SITE.logoDark} alt={SITE.title} /></a>
+      </h1>
+
+      <div class="header_right">
+        <div class="header_top">
+          <ul class="menu">
+            <li><a href="/about-us.html">关于宏晟</a></li>
+            <li><a href="/project.html">项目</a></li>
+            <li><a href="/play-solar.html">光伏知识</a></li>
+            <li><a href="/technical-services.html">支持</a></li>
+            <li><a href="/faq.html">常见问题</a></li>
+            <li><a href="/contact-us.html">联系我们</a></li>
+          </ul>
+        </div>
+
+        <div class="header_bottom">
+          <div class="mainmenu-area">
+            <div class="mainmenu-left visible-lg visible-md">
+              <div class="mainmenu">
+                <nav>
+                  <ul class="clearfix">
+                    {PRODUCT_CATEGORIES.map((cat) => (
+                      <li class="product_vmegamenu">
+                        <a href={`/category-${cat.id}.html`}>{cat.name}</a>
+                        {cat.children && cat.children.length > 0 && (
+                          <ul class="vmegamenu">
+                            {cat.children.map((sub) => (
+                              <li>
+                                <a href={`/category-${sub.id}.html`} class="title">{sub.name}</a>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+          <div class="search_box">
+            <div class="attr-nav">
+              <a class="search"><img src="/Public/theme/default/picture/search.png" alt="搜索" /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 移动端抽屉导航 -->
+    <div class="wrapper">
+      <nav id="main-nav">
+        <ul class="first-nav">
+          <li><a href="/">主页</a></li>
+        </ul>
+        <ul class="second-nav">
+          <li>
+            <a href="/category.html">产品</a>
+            <ul class="nav_child">
+              {PRODUCT_CATEGORIES.map((cat) => (
+                <li>
+                  <a href={`/category-${cat.id}.html`}>{cat.name}</a>
+                  {cat.children && cat.children.length > 0 && (
+                    <ul>
+                      {cat.children.map((sub) => (
+                        <li><a href={`/category-${sub.id}.html`}>{sub.name}</a></li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </li>
+          <li>
+            <a href="/about-us.html">关于我们</a>
+            <ul class="nav_child">
+              <li><a href="/about-us.html">公司简介</a></li>
+              <li><a href="/why-we-different.html">为什么我们不同</a></li>
+              <li><a href="/news.html">新闻与事件</a></li>
+            </ul>
+          </li>
+          <li><a href="/project.html">项目</a></li>
+          <li>
+            <a href="/play-solar.html">光伏知识</a>
+            <ul class="nav_child">
+              <li><a href="/news-8.html">为什么选择光伏？</a></li>
+              <li><a href="/news-9.html">光伏系统的好处</a></li>
+              <li><a href="/faq.html">常见问题</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="/technical-services.html">支持</a>
+            <ul class="nav_child">
+              <li><a href="/technical-services.html">技术服务</a></li>
+            </ul>
+          </li>
+          <li><a href="/contact-us.html">联系我们</a></li>
+        </ul>
+      </nav>
+      <a class="toggle"><span></span><span></span><span></span></a>
+    </div>
+  </div>
+</header>

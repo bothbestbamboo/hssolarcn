@@ -1,0 +1,425 @@
+/* =========================================================
+   Homesun Solar - 国际工业 B2B 字体、间距与防裁切样式
+   注意：严禁在 html 标签上设置 font-size，避免破坏原站 rem 高度计算
+   ========================================================= */
+:root {
+  --b2b-font: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --b2b-heading: #111827;
+  --b2b-text: #374151;
+  --b2b-muted: #6b7280;
+  --b2b-brand: #2596d1;
+}
+
+/* 1. 仅在 html 声明字体族；字号和行高只写在 body，绝对不改 html 的 font-size */
+html {
+  font-family: var(--b2b-font) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--b2b-font) !important;
+  font-size: 15px;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: var(--b2b-text);
+}
+
+/* 保护图标字体不被覆盖 */
+.fa,
+[class^='fa-'],
+[class*=' fa-'] {
+  font-family: 'FontAwesome' !important;
+  letter-spacing: 0 !important;
+  word-spacing: 0 !important;
+}
+
+.layui-icon {
+  font-family: 'layui-icon' !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, a, li, span, td, th,
+input, textarea, button, select {
+  font-family: var(--b2b-font);
+}
+
+/* 2. Header 区域：纯白底栏 + 清晰的导航间距，绝不遮挡 Banner */
+header,
+header.large,
+header.small {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 12px rgba(17, 24, 39, 0.08) !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  z-index: 999 !important;
+}
+
+header .header {
+  background-color: #ffffff !important;
+}
+
+.height {
+  display: block !important;
+  height: 112px !important;
+  clear: both;
+}
+
+.header_top .menu {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px !important;
+}
+
+.header_top .menu li {
+  margin: 0 !important;
+  padding: 0 !important;
+  float: none !important;
+}
+
+.header_top .menu li a {
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  color: #4b5563 !important;
+  white-space: nowrap !important;
+}
+
+.header_top .menu li a:hover {
+  color: var(--b2b-brand) !important;
+}
+
+.mainmenu nav > ul {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 28px !important;
+}
+
+.mainmenu nav > ul > li {
+  float: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative;
+}
+
+.mainmenu nav > ul > li > a {
+  display: inline-block !important;
+  padding: 12px 2px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--b2b-heading) !important;
+  white-space: nowrap !important;
+}
+
+.mainmenu nav > ul > li > a:hover,
+.mainmenu nav > ul > li:hover > a {
+  color: var(--b2b-brand) !important;
+}
+
+.vmegamenu li a.title {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #374151 !important;
+}
+
+.vmegamenu li a.title:hover {
+  color: var(--b2b-brand) !important;
+}
+
+/* 3. 内页 Banner：按原图比例完整展示，绝不裁切文字 */
+.inner_banner {
+  position: relative;
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  margin-top: 0 !important;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.inner_banner img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 460px !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  display: block;
+}
+
+/* 4. 首页大标题与副标题（彻底修复 HOT PRODUCTS / Better Than Good 副标题被压扁） */
+.maintitle {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  color: var(--b2b-heading) !important;
+  line-height: 1.3 !important;
+  margin-bottom: 12px !important;
+}
+
+.index_text {
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  font-size: 15.5px !important;
+  line-height: 1.75 !important;
+  color: #4b5563 !important;
+  text-transform: none !important;
+  margin-top: 8px !important;
+  margin-bottom: 30px !important;
+}
+
+.mbx_section {
+  padding: 26px 0 20px !important;
+}
+
+.mbx_section .maintitle {
+  font-size: 30px !important;
+  font-weight: 700 !important;
+  margin-bottom: 8px !important;
+}
+
+.mbx,
+.mbx a,
+.mbx h2 {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--b2b-muted) !important;
+  text-transform: none !important;
+}
+
+/* 5. 首页各板块卡片文字 */
+.cat_content .moudle .title,
+.case_content .moudle .title,
+.news_content .moudle .title,
+.about_content .wrap .title,
+.solution_content .wrap .title {
+  height: auto !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
+  color: var(--b2b-heading);
+  text-transform: none !important;
+}
+
+.about_content .wrap .text,
+.case_content .moudle .text,
+.solution_content .wrap .text,
+.news_content .moudle .text,
+.study_content .text {
+  height: auto !important;
+  font-size: 14.5px !important;
+  line-height: 1.7 !important;
+  text-transform: none !important;
+}
+
+/* 6. 新闻/案例列表页 */
+.news ul li .li,
+.news ul li .text {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.news ul li .text .h4 {
+  display: block !important;
+  height: auto !important;
+  max-height: none !important;
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  color: var(--b2b-heading) !important;
+  text-transform: none !important;
+  margin: 0 0 8px 0 !important;
+}
+
+.news ul li .text .h4:hover {
+  color: var(--b2b-brand) !important;
+}
+
+.news ul li .text .day,
+.blog_main .blog-info,
+.news_content .moudle .date {
+  font-size: 13px !important;
+  font-weight: 500;
+  color: var(--b2b-muted) !important;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 10px !important;
+  line-height: 1.4 !important;
+}
+
+.news ul li .text p {
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  margin: 0 0 14px 0 !important;
+  padding: 0 !important;
+  font-size: 14.5px !important;
+  line-height: 1.7 !important;
+  color: #4b5563 !important;
+  text-transform: none !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.news ul li .text > a span {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--b2b-brand);
+}
+
+/* 7. 左侧边栏（彻底修复 New Product 标题与 Read more 被挤压） */
+.left_nav .nav_h4,
+.block .left_h4 {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+}
+
+.left_nav .mtree > li > a,
+#main .mtree > li > a {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  line-height: 1.5 !important;
+  color: var(--b2b-heading) !important;
+}
+
+.left_nav .mtree ul li,
+#main .mtree ul li {
+  height: auto !important;
+}
+
+.left_nav .mtree ul li a,
+#main .mtree ul li a {
+  display: block !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  padding: 9px 14px 9px 24px !important;
+  color: #4b5563 !important;
+}
+
+.left_nav .mtree ul li a:hover,
+.left_nav .mtree ul li.active > a,
+#main .mtree ul li.active > a {
+  color: var(--b2b-brand) !important;
+  font-weight: 600 !important;
+}
+
+.hot_left ul li {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.hot_left .li {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding: 12px !important;
+}
+
+.hot_left .h4 {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  margin: 0 0 6px 0 !important;
+  line-height: 1.45 !important;
+}
+
+.hot_left .h4 a {
+  display: block !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  -webkit-line-clamp: unset !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
+  color: var(--b2b-heading) !important;
+}
+
+.hot_left .more {
+  display: inline-block !important;
+  height: auto !important;
+  max-height: none !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  color: var(--b2b-brand) !important;
+  margin-top: 6px !important;
+}
+
+.blog_nav2 ul li a {
+  font-size: 13.5px !important;
+  line-height: 1.55 !important;
+  color: #374151 !important;
+}
+
+.hot_tags a {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+/* 8. 文章详情页、单页与产品卡片 */
+.blog_main h1 {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  color: var(--b2b-heading) !important;
+  text-transform: none !important;
+}
+
+.blog_p,
+.about.page {
+  font-size: 15.5px !important;
+  line-height: 1.8 !important;
+  color: var(--b2b-text);
+  text-transform: none !important;
+}
+
+.thumbnail .caption h4,
+.thumbnail .caption h4 a {
+  font-size: 15.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
+  color: var(--b2b-heading) !important;
+  text-transform: none !important;
+}
+
+/* 9. 页脚与移动端适配 */
+#footer,
+#footer .text,
+#footer li a,
+#footer .footer_nav {
+  font-size: 14px !important;
+  line-height: 1.7;
+}
+
+#footer .title_h4 {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 991px) {
+  .height {
+    height: 68px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .maintitle,
+  .mbx_section .maintitle {
+    font-size: 24px !important;
+  }
+  .blog_main h1 {
+    font-size: 22px !important;
+  }
+  .news ul li .text .h4 {
+    font-size: 16.5px !important;
+  }
+}

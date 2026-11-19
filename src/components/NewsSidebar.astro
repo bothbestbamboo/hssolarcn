@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import { POPULAR_TAGS } from '../data/site';
+
+interface Props {
+  activeType?: 'news' | 'case' | 'solution' | 'knowledge';
+}
+
+const { activeType = 'news' } = Astro.props;
+
+const latestNews = (await getCollection('news'))
+  .filter((n) => n.data.type === 'news')
+  .sort((a, b) => {
+    const timeDiff = new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+    return timeDiff !== 0 ? timeDiff : b.data.id - a.data.id;
+  })
+  .slice(0, 8);
+---
+
+<div id="main" class="n_left penci-main-sticky-sidebar">
+  <div class="theiaStickySidebar">
+    <div class="modules">
+      <section class="block left_nav">
+        <div class="unfold nav_h4">分类</div>
+        <div class="toggle_content clearfix">
+          <ul class="mtree">
+            <li class={`clearfix ${activeType === 'news' ? 'active' : ''}`}>
+              <span></span>
+              <a href="/news.html">新闻<i></i></a>
+            </li>
+            <li class={`clearfix ${activeType === 'case' ? 'active' : ''}`}>
+              <span></span>
+              <a href="/project.html">项目<i></i></a>
+            </li>
+          </ul>
+        </div>
+        <script is:inline src="/Public/theme/default/js/mtree.js"></script>
+      </section>
+
+      <section class="block blog_nav blog_nav2">
+        <div class="unfold left_h4">最新新闻</div>
+        <div class="toggle_content clearfix">
+          <ul>
+            {latestNews.map((item) => (
+              <li>
+                <a href={`/news-${item.data.id}.html`}>
+                  <i class="fa fa-caret-right"></i>{item.data.title}
+                </a>
+                <i></i>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section class="block hot_tags">
+        <div class="unfold left_h4">标签</div>
+        <div class="toggle_content clearfix">
+          {POPULAR_TAGS.map((tag) => (
+            <a href={`/category-tags-${tag.id}.html`}>{tag.name}</a>
+          ))}
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

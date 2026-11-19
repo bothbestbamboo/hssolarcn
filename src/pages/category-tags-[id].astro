@@ -1,0 +1,84 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InnerBanner from '../components/InnerBanner.astro';
+import ProductSidebar from '../components/ProductSidebar.astro';
+import { POPULAR_TAGS } from '../data/site';
+
+export async function getStaticPaths() {
+  const allProducts = await getCollection('products');
+
+  return POPULAR_TAGS.map((tag) => {
+    const matched = allProducts
+      .filter((p) => {
+        const tagMatch = (p.data.tags || []).some(
+          (t: string) => t.toLowerCase() === tag.name.toLowerCase()
+        );
+        const titleMatch = p.data.title.toLowerCase().includes(tag.name.toLowerCase());
+        return tagMatch || titleMatch;
+      })
+      .sort((a, b) => a.data.id - b.data.id);
+
+    return {
+      params: { id: String(tag.id) },
+      props: { tag, products: matched },
+    };
+  });
+}
+
+const { tag, products } = Astro.props;
+---
+
+<BaseLayout
+  title={`${tag.name} - 热门标签 - 宏晟光伏`}
+  description={`查看带有“${tag.name}”标签的宏晟光伏相关产品。`}
+>
+  <InnerBanner
+    title={`标签：${tag.name}`}
+    bannerImg="/Public/theme/default/picture/product.jpg"
+    breadcrumbs={[
+      { label: '产品中心', href: '/category.html' },
+      { label: tag.name },
+    ]}
+  />
+
+  <div class="n_main">
+    <div class="container clearfix">
+      <div class="n_right">
+        {products.length > 0 ? (
+          <div class="row">
+            {products.map((item) => (
+              <div class="col-md-4 col-sm-6" style="margin-bottom: 30px;">
+                <div class="thumbnail" style="height: 100%; border-color: #eee;">
+                  <a href={`/product-detail-${item.data.id}.html`}>
+                    <img
+                      src={item.data.image}
+                      alt={item.data.title}
+                      style="width:100%; height:220px; object-fit:contain; padding:10px;"
+                    />
+                  </a>
+                  <div class="caption">
+                    <h4 style="font-size: 15px; line-height: 1.5; min-height: 46px;">
+                      <a href={`/product-detail-${item.data.id}.html`} style="color:#333;">
+                        {item.data.title}
+                      </a>
+                    </h4>
+                    <a href={`/product-detail-${item.data.id}.html`} class="btn btn-primary btn-sm">
+                      查看详情
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div style="text-align: center; padding: 80px 0; color: #666; font-size: 15px;">
+            该标签下暂无产品数据...
+          </div>
+        )}
+      </div>
+
+      <ProductSidebar />
+    </div>
+  </div>
+</BaseLayout>

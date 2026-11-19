@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InnerBanner from '../components/InnerBanner.astro';
+import NewsListView from '../components/NewsListView.astro';
+
+const items = (await getCollection('news'))
+  .filter((n) => n.data.type === 'case' || n.data.type === 'project')
+  .sort((a, b) => {
+    const timeDiff = new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+    return timeDiff !== 0 ? timeDiff : b.data.id - a.data.id;
+  });
+---
+
+<BaseLayout
+  title="项目 - 宏晟光伏: 太阳能板与光伏板的生产厂家"
+  description="宏晟光伏全球光伏电站与锂电池储能系统工程项目案例展示。"
+  keywords="光伏项目案例, 储能系统案例, 宏晟光伏"
+>
+  <InnerBanner
+    title="项目"
+    bannerImg="/Public/theme/default/image/project.jpg"
+    bannerAlt="项目"
+    breadcrumbs={[{ label: '项目' }]}
+  />
+
+  <NewsListView items={items} activeType="case" buttonText="查看更多" />
+</BaseLayout>

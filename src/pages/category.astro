@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InnerBanner from '../components/InnerBanner.astro';
+import ProductSidebar from '../components/ProductSidebar.astro';
+
+const products = (await getCollection('products')).sort((a, b) => a.data.id - b.data.id);
+---
+
+<BaseLayout
+  title="全部商品 - 宏晟光伏: 太阳能板与光伏板的生产厂家"
+  description="浏览宏晟光伏全系列太阳能组件、逆变器、电池存储、太阳能解决方案、安装系统及配件产品。"
+>
+  <InnerBanner
+    title="全部商品"
+    bannerImg="/Public/theme/default/picture/product.jpg"
+    bannerAlt="全部商品"
+    breadcrumbs={[{ label: '全部商品' }]}
+  />
+
+  <div class="n_main">
+    <div class="container clearfix">
+      <div class="n_right">
+        <div id="search-notice" style="display:none; margin-bottom: 20px;" class="alert alert-info">
+          搜索结果：<strong id="search-keyword"></strong>
+          <a href="/category.html" style="margin-left: 12px;">清除筛选</a>
+        </div>
+
+        <div class="row" id="product-grid">
+          {products.map((item) => (
+            <div
+              class="col-md-4 col-sm-6 product-card"
+              data-title={item.data.title.toLowerCase()}
+              data-tags={(item.data.tags || []).join(' ').toLowerCase()}
+              style="margin-bottom: 30px;"
+            >
+              <div class="thumbnail" style="height: 100%; border-color: #eee;">
+                <a href={`/product-detail-${item.data.id}.html`}>
+                  <img
+                    src={item.data.image}
+                    alt={item.data.title}
+                    style="width:100%; height:220px; object-fit:contain; padding:10px;"
+                  />
+                </a>
+                <div class="caption">
+                  <h4 style="font-size: 15px; line-height: 1.5; min-height: 46px;">
+                    <a href={`/product-detail-${item.data.id}.html`} style="color:#333;">
+                      {item.data.title}
+                    </a>
+                  </h4>
+                  <a href={`/product-detail-${item.data.id}.html`} class="btn btn-primary btn-sm">
+                    查看详情
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p id="no-result" style="display:none; text-align:center; padding:60px 0; color:#666;">
+          暂无相关产品数据...
+        </p>
+      </div>
+
+      <ProductSidebar />
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const q = (params.get('labels') || '').trim().toLowerCase();
+      if (!q) return;
+
+      document.getElementById('search-notice').style.display = 'block';
+      document.getElementById('search-keyword').textContent = params.get('labels');
+
+      const cards = document.querySelectorAll('.product-card');
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = (card.dataset.title || '') + ' ' + (card.dataset.tags || '');
+        if (text.includes(q)) {
+          card.style.display = '';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      if (visibleCount === 0) {
+        document.getElementById('no-result').style.display = 'block';
+      }
+    })();
+  </script>
+</BaseLayout>

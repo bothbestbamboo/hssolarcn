@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InnerBanner from '../components/InnerBanner.astro';
+import NewsListView from '../components/NewsListView.astro';
+
+const items = (await getCollection('news'))
+  .filter((n) => n.data.type === 'knowledge')
+  .sort((a, b) => a.data.id - b.data.id);
+---
+
+<BaseLayout
+  title="光伏知识 - 宏晟光伏: 太阳能板与光伏板的生产厂家"
+  description="宏晟光伏太阳能知识中心：探索为什么选择光伏、光伏系统的核心优势与清洁能源应用知识。"
+  keywords="光伏知识, 太阳能知识, 为什么选择光伏"
+>
+  <InnerBanner
+    title="光伏知识"
+    bannerImg="/Public/theme/default/image/play-solar.jpg"
+    bannerAlt="光伏知识"
+    breadcrumbs={[{ label: '光伏知识' }]}
+  />
+
+  <NewsListView
+    items={items}
+    activeType="knowledge"
+    buttonText="阅读全文"
+    emptyText="暂无光伏知识文章。"
+  />
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  title: string;
+  bannerImg: string;
+  bannerAlt?: string;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const {
+  title,
+  bannerImg,
+  bannerAlt = title,
+  breadcrumbs = [],
+} = Astro.props;
+---
+
+<div class="height"></div>
+<div class="inner_banner">
+  <a>
+    <picture>
+      <img src={bannerImg} alt={bannerAlt} />
+    </picture>
+  </a>
+  <div class="ovrly"></div>
+  <div class="bgs"></div>
+</div>
+
+<div class="mbx_section">
+  <div class="container">
+    <div class="maintitle">{title}</div>
+    <div class="mbx">
+      <a href="/"><i class="fa fa-home"></i> 主页</a>
+      {breadcrumbs.map((item, idx) => (
+        <>
+          <span>/</span>
+          {item.href && idx < breadcrumbs.length - 1 ? (
+            <a href={item.href}>{item.label}</a>
+          ) : (
+            <h2>{item.label}</h2>
+          )}
+        </>
+      ))}
+    </div>
+  </div>
+</div>
