@@ -4,7 +4,7 @@ export const SITE = {
   description: '宏晟光伏是太阳能板与光伏板的生产厂家，专业生产N型TOPCon、HJT异质结太阳能组件、逆变器及电池储能系统。',
   keywords: '太阳能板, 光伏板, 光伏组件, 宏晟光伏',
   logoLight: '/Uploads/images/logocn.png',
-  logoDark: '/Uploads/images/logocn.png',
+  logoDark: '/Uploads/images/logocn-dark.png',
   phone: '13905633017',
   email: 'info@hssolar.com',
   address: '安徽宣城市宁国经开区兴盛路',
