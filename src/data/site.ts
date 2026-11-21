@@ -13,7 +13,7 @@ export const SITE = {
   web3formsKey: '007ddd91-be4f-4381-b504-f9464f95e06d',
   friendlyLinks: [
     { name: 'Homesun Solar Panels', href: 'https://www.hssolar.com/' },
-    { name: 'bamboo flooring', href: 'https://www.bambooindustry.com/' },
+    { name: 'bamboo decking', href: 'https://www.bambooindustry.com/' },
   ],
 };
 
