@@ -2,38 +2,44 @@
 title: "技术服务"
 bannerImg: "/Public/theme/default/image/suppport.jpg"
 seoTitle: "技术服务 - 宏晟光伏: 太阳能板与光伏板的生产厂家"
-description: "宏晟光伏是太阳能板与光伏板的生产厂家"
-keywords: "太阳能板"
+description: "宏晟光伏为全球客户提供远程服务支持、光伏工程与制图设计支持及专家级故障排除服务。"
+keywords: "光伏技术服务, 光伏系统设计, 太阳能售后支持"
 ---
 
-<div class="det_pic_content clearfix mceTmpl">
-                    <div class="">
-                        <ul id="list_three" class="list">
-                            <li>
-                                <div class="column"><a class="image" href="#"><img src="/Public/theme/default/picture/support-1.jpg" alt="#"></a>
-                                    <div class="wrap"><span style="font-size: 18px; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;"><a class="title" style="color: #005bac; line-height: 24px; display: block; font-weight: 600;" href="#">远程服务支持</a></span></div>
-                                    <div class="wrap" style="line-height: 1;"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 14px; color: #000000;">1.在线技术支持</span></div>
-                                    <div class="wrap" style="line-height: 1;"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 14px; color: #000000;">2、远程监控和分析</span></div>
-                                    <div class="wrap" style="line-height: 1;"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 14px; color: #000000;">3、远程软件升级</span></div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="column"><a class="image" href="#"><img src="/Public/theme/default/picture/support-2.jpg" alt="#"></a>
-                                    <div class="wrap"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 14px;"><a class="title" style="color: #005bac; line-height: 24px; display: block; font-weight: 600;" href="#">工程和制图支持</a></span>
-                                        <div class="text"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 14px; color: #000000;">宏晟光伏设计部将提供最专业的系统设计和 </span></div>
-                                         <div class="text"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 14px; color: #000000;">整个图纸。 </span></div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="column"><a class="image" href="#"><img src="/Public/theme/default/picture/support-3.jpg" alt="#"></a>
-                                    <div class="wrap"><a class="title" style="color: #005bac; font-size: 16px; line-height: 24px; display: block; font-weight: 600;" href="#"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;">故障排除支持</span></a>
-                                        <div class="text"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 14px; color: #000000;">对于尚未彻底解决的疑难问题， </span></div>
-                                        <div class="text"><span style="color: #000000;"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 14px;">宏晟光伏</span><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;">太阳能专家将解决这些问题。</span></span></div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <p>&nbsp;</p>
+<div class="hs-service-grid">
+  <div class="hs-service-card">
+    <img src="/Public/theme/default/picture/support-1.jpg" alt="远程服务支持" loading="lazy" decoding="async" />
+    <div class="hs-service-body">
+      <h2>远程服务支持</h2>
+      <ul>
+        <li>专业在线技术支持，快速响应选型与调试咨询。</li>
+        <li>提供光伏系统远程监控与运行发电效率分析。</li>
+        <li>支持逆变器与监控系统远程软件固件升级，保障系统持续稳定运行。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hs-service-card">
+    <img src="/Public/theme/default/picture/support-2.jpg" alt="工程和制图支持" loading="lazy" decoding="async" />
+    <div class="hs-service-body">
+      <h2>工程与制图支持</h2>
+      <ul>
+        <li>宏晟光伏专业设计部提供定制化光伏与储能系统整体方案设计。</li>
+        <li>根据项目屋顶结构、光照条件与用电负荷输出完整排布与电气图纸。</li>
+        <li>提供详细的安装指导手册，助力现场团队高效、规范施工。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hs-service-card">
+    <img src="/Public/theme/default/picture/support-3.jpg" alt="故障排除支持" loading="lazy" decoding="async" />
+    <div class="hs-service-body">
+      <h2>故障排除支持</h2>
+      <ul>
+        <li>针对电站安装及并网运行后出现的疑难问题，由宏晟光伏资深专家快速定位并协同解决。</li>
+        <li>提供清晰透明的质保服务流程与备件更换响应机制。</li>
+        <li>持续输出常见故障排查指南，帮助运维团队高效维护电站资产。</li>
+      </ul>
+    </div>
+  </div>
+</div>

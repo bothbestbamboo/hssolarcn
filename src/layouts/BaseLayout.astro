@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import { SITE } from '../data/site';
 import '../styles/markdown.css';
 import '../styles/b2b-typography.css';
+import '../styles/inner-pages.css';
 
 interface Props {
   title?: string;
@@ -15,9 +16,9 @@ interface Props {
 }
 
 const {
-  title = SITE.name,
-  description = SITE.defaultDescription,
-  keywords = SITE.defaultKeywords,
+  title = SITE.title,
+  description = SITE.description,
+  keywords = SITE.keywords,
   isHome = false,
   preloadImage,
   needLightbox = false,
@@ -25,7 +26,7 @@ const {
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,27 +40,19 @@ const {
       <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
     )}
 
-    <!-- 核心首屏布局 CSS（保持同步防样式闪烁） -->
+    <!-- 核心首屏布局 CSS -->
     <link rel="stylesheet" href="/Public/theme/default/css/moban.css">
     <link rel="stylesheet" href="/Public/theme/default/css/bootstrap.css">
     <link rel="stylesheet" href="/Public/theme/default/css/swiper.css">
     <link rel="stylesheet" href="/Public/theme/default/css/style.css">
 
-    <!-- 图标字体与 Web 字体改为异步加载，不阻塞首屏绘制 -->
+    <!-- 图标字体异步加载，不阻塞首屏绘制 -->
     <link
       rel="stylesheet"
       href="/Public/theme/default/css/font-awesome.min.css"
       media="print"
       onload="this.media='all'"
     >
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
 
     {needLightbox && (
       <link
@@ -72,12 +65,11 @@ const {
 
     <noscript>
       <link rel="stylesheet" href="/Public/theme/default/css/font-awesome.min.css">
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     </noscript>
 
     <slot name="head" />
 
-    <!-- jQuery 使用 defer：最早发现并下载，但不阻塞 HTML 解析，且保证在 Footer 中其他 defer 脚本前执行 -->
+    <!-- jQuery 使用 defer，确保在 Footer 脚本之前执行 -->
     <script is:inline defer src="/Public/Script/jquery.min.js"></script>
 </head>
 <body>
@@ -86,42 +78,39 @@ const {
     <Footer isHome={isHome} />
 
     <style is:global>
-  /* 1. 替代原头部 jQuery UA 判断脚本 */
-  @media (max-width: 768px) {
-    .phone img {
-      width: auto !important;
-      height: auto !important;
-      max-width: 100% !important;
-    }
-  }
+      @media (max-width: 768px) {
+        .phone img {
+          width: auto !important;
+          height: auto !important;
+          max-width: 100% !important;
+        }
+      }
 
-  /* 2. 修复首页与内页 Banner 在手机端被竖向挤压变形 */
-  .index_banner .slide-inner img,
-  .swiper-banner .slide-inner img,
-  .inner_banner img {
-    width: 100% !important;
-    height: auto !important;
-    max-width: 100% !important;
-    display: block;
-  }
+      .index_banner .slide-inner img,
+      .swiper-banner .slide-inner img,
+      .inner_banner img {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+        display: block;
+      }
 
-  @media (max-width: 991px) {
-    .index_banner,
-    .swiper-banner,
-    .index_banner .swiper-slide,
-    .index_banner .slide-inner,
-    .inner_banner {
-      height: auto !important;
-      min-height: 0 !important;
-    }
-  }
+      @media (max-width: 991px) {
+        .index_banner,
+        .swiper-banner,
+        .index_banner .swiper-slide,
+        .index_banner .slide-inner,
+        .inner_banner {
+          height: auto !important;
+          min-height: 0 !important;
+        }
+      }
 
-  /* 3. 桌面端直接显示左侧产品分类，避免等待 JS 展开导致闪烁 */
-  @media (min-width: 993px) {
-    .modules .toggle_content {
-      display: block !important;
-    }
-  }
-</style>
+      @media (min-width: 993px) {
+        .modules .toggle_content {
+          display: block !important;
+        }
+      }
+    </style>
 </body>
 </html>

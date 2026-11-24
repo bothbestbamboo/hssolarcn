@@ -17,57 +17,66 @@ const latestNews = (await getCollection('news'))
   .slice(0, 8);
 ---
 
-<div id="main" class="n_left penci-main-sticky-sidebar">
-  <div class="theiaStickySidebar">
-    <div class="modules">
-      <section class="block left_nav">
-        <div class="unfold nav_h4">分类</div>
-        <div class="toggle_content clearfix">
-          <ul class="mtree">
-            <li class={`clearfix ${activeType === 'news' ? 'active' : ''}`}>
-              <span></span>
-              <a href="/news.html">新闻<i></i></a>
-            </li>
-            <li class={`clearfix ${activeType === 'case' ? 'active' : ''}`}>
-              <span></span>
-              <a href="/project.html">项目<i></i></a>
-            </li>
-          </ul>
-        </div>
-        <!-- 替换原来的 mtree.js 引入 -->
-<script is:inline defer src="/Public/theme/default/js/mtree.js"></script>
-      </section>
-
-      <section class="block blog_nav blog_nav2">
-        <div class="unfold left_h4">最新新闻</div>
-        <div class="toggle_content clearfix">
-          <ul>
-            {latestNews.map((item) => (
-              <li>
-                <a href={`/news-${item.data.id}.html`}>
-                  <i class="fa fa-caret-right"></i>{item.data.title}
-                </a>
-                <i></i>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section class="block hot_tags">
-        <div class="unfold left_h4">标签</div>
-        <div class="toggle_content clearfix">
-          {POPULAR_TAGS.map((tag) => (
-            <a href={`/category-tags-${tag.id}.html`}>{tag.name}</a>
-          ))}
-        </div>
-      </section>
+<aside class="hs-sidebar" aria-label="资讯导航">
+  <section class="hs-side-card">
+    <div class="hs-side-head">
+      <span>栏目分类</span>
     </div>
-  </div>
-</div>
+    <div class="hs-side-body">
+      <ul class="hs-cat-menu">
+        <li class={`hs-cat-item ${activeType === 'news' ? 'is-active' : ''}`}>
+          <div class="hs-cat-row">
+            <a href="/news.html" class="hs-cat-link">新闻与动态</a>
+          </div>
+        </li>
+        <li class={`hs-cat-item ${activeType === 'case' ? 'is-active' : ''}`}>
+          <div class="hs-cat-row">
+            <a href="/project.html" class="hs-cat-link">工程项目案例</a>
+          </div>
+        </li>
+        <li class={`hs-cat-item ${activeType === 'knowledge' ? 'is-active' : ''}`}>
+          <div class="hs-cat-row">
+            <a href="/play-solar.html" class="hs-cat-link">光伏知识库</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-<style is:global>
-  ul.mtree {
-    opacity: 1 !important;
-  }
-</style>
+  <section class="hs-side-card">
+    <div class="hs-side-head hs-side-head-light">
+      <span>最新资讯</span>
+    </div>
+    <div class="hs-side-body">
+      <ul class="hs-side-news">
+        {latestNews.map((item) => (
+          <li>
+            <a href={`/news-${item.data.id}.html`}>
+              <span class="hs-side-news-dot" aria-hidden="true"></span>
+              <span>{item.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="hs-side-card">
+    <div class="hs-side-head hs-side-head-light">
+      <span>热门标签</span>
+    </div>
+    <div class="hs-side-body">
+      <div class="hs-side-tags">
+        {POPULAR_TAGS.map((tag) => (
+          <a href={`/category-tags-${tag.id}.html`}>{tag.name}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="hs-side-cta">
+    <h4>正在筹备光伏项目？</h4>
+    <p>免费获取组件规格书、系统选型建议及安徽生产基地厂家直供报价。</p>
+    <a href="/contact-us.html">立即咨询报价</a>
+  </section>
+</aside>

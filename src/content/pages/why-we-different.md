@@ -1,71 +1,64 @@
 ---
-title: "公司简介"
-bannerImg: "/Public/theme/default/image/about-us-banner.jpg"
+title: "为什么我们不同"
+bannerImg: "/Public/theme/default/image/why-different.jpg"
 seoTitle: "为什么我们不同 - 宏晟光伏: 太阳能板与光伏板的生产厂家"
-description: "宏晟光伏是太阳能板与光伏板的生产厂家"
-keywords: "太阳能板"
+description: "了解宏晟光伏在700W+高效组件制造、技术团队、美学设计、TÜV/Intertek严苛质控及30年质保方面的核心优势。"
+keywords: "宏晟光伏优势, 高效太阳能板, HJT异质结组件"
 ---
 
-<div class="page_quality2L clearfix">
-<div class="clearfix spe_main">
-<div class="page_quality2L_img" style="width: 748px;"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;"><img style="width: 748px;" src="/Uploads/images/20241124/w-w-d-1.jpg"></span></div>
-<div class="text-detail" style="width: 748px; padding: 29.9062px 14.9531px;">
-<p><span style="font-size: 24px; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;"><strong>高性能，实惠的价格</strong></span></p>
-<p>&nbsp;</p>
-<p><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;">安装高效模块以提高每平方米的发电量至关重要。我们的模块达到 +700Wp，确保出色的性价比。</span></p>
-</div>
-</div>
-</div>
-<div class="dadasfs" style="margin-top: 20px;">
-<div class="page_quality2L clearfix">
-<div class="clearfix spe_main spe_main_2">
-<div class="page_quality2L_img" style="width: 748px;"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;"><img style="width: 748px;" src="/Uploads/images/20241124/w-w-d-2.jpg"></span></div>
-<div class="text-detail" style="width: 748px; padding: 29.9062px 14.9531px;">
-<p><span style="font-size: 24px; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;"><strong>技术专长</strong></span></p>
-<p>&nbsp;</p>
-<p><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;">我们为我们高技能的员工队伍感到自豪。只有我们完整的技术和客户支持才能与我们的制造专业知识相匹配。</span></p>
-</div>
-</div>
-</div>
-<div class="dadasfs" style="margin-top: 20px;">
-<div class="page_quality2L clearfix">
-<div class="clearfix spe_main">
-<div class="page_quality2L_img" style="width: 748px;"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;"><img style="width: 748px;" src="/Uploads/images/20241124/w-w-d-3.jpg"></span></div>
-<div class="text-detail" style="width: 748px; padding: 29.9062px 14.9531px;">
-<p><span style="font-size: 24px; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;"><strong>美丽的设计</strong></span></p>
-<p>&nbsp;</p>
-<p><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;">卓越的美学是我们的标志。为什么？因为我们相信功能和吸引人的尖端设计是齐头并进的。</span></p>
-<p><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;">&nbsp;</span></p>
-</div>
-</div>
-</div>
-<div class="dadasfs" style="margin-top: 20px;">
-<div class="det_pic_content clearfix mceTmpl">
-<div class="">
-<div class="page_quality2L clearfix">
-<div class="clearfix spe_main spe_main_2">
-<div class="page_quality2L_img"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;"><img src="/Uploads/images/20241124/w-w-d-4.jpg"></span></div>
-<div class="text-detail">
-<p><span style="font-size: 24px; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;"><strong>质量保证</strong></span></p>
-<p>&nbsp;</p>
-<p><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;">我们的组件在生产的每个阶段都经过严格的质量控制，并通过 TÜV 和 Intertek 等世界级独立机构的检验和认证。</span></p>
-</div>
-</div>
-</div>
-<div class="dadasfs" style="margin-top: 20px;">
-<div class="page_quality2L clearfix">
-<div class="clearfix spe_main">
-<div class="page_quality2L_img"><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;"><img src="/Uploads/images/20241124/w-w-d-5.jpg"></span></div>
-<div class="text-detail">
-<p><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;"><span style="font-size: 24px;"><strong>30 年产品质保</strong></span></span></p>
-<p>&nbsp;</p>
-<p><span style="font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;">宏晟光伏组件线性性能保证在30年末保证高达91.25%的功率输出，同时组件还提供长达30年的产品覆盖。</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<div class="hs-feature-list">
+  <div class="hs-feature-row">
+    <div class="hs-feature-media">
+      <img src="/Uploads/images/20241124/w-w-d-1.jpg" alt="高性能，实惠的价格" loading="lazy" decoding="async" />
+    </div>
+    <div class="hs-feature-text">
+      <span class="hs-feature-num">01 · 高性价比</span>
+      <h2>高性能输出，厂家直供价格</h2>
+      <p>选用高转换效率组件是提升单位面积发电量的关键。宏晟光伏高效组件峰值功率可突破 700Wp，配合源头工厂直供体系，为项目带来极具竞争力的度电成本与投资回报。</p>
+    </div>
+  </div>
+
+  <div class="hs-feature-row is-reverse">
+    <div class="hs-feature-media">
+      <img src="/Uploads/images/20241124/w-w-d-2.jpg" alt="专业技术与制造团队" loading="lazy" decoding="async" />
+    </div>
+    <div class="hs-feature-text">
+      <span class="hs-feature-num">02 · 技术专长</span>
+      <h2>资深制造与工程技术专长</h2>
+      <p>我们拥有经验丰富的研发、工艺制造与光伏系统工程团队。从电芯分选、组件封装到项目选型和客户技术响应，每个环节都由专业团队严格把关。</p>
+    </div>
+  </div>
+
+  <div class="hs-feature-row">
+    <div class="hs-feature-media">
+      <img src="/Uploads/images/20241124/w-w-d-3.jpg" alt="现代工业美学设计" loading="lazy" decoding="async" />
+    </div>
+    <div class="hs-feature-text">
+      <span class="hs-feature-num">03 · 美学设计</span>
+      <h2>兼具发电性能与工业美学</h2>
+      <p>从全黑户用美学组件到双面双玻高效组件，精致的外观设计一直是宏晟产品的标志。我们坚信出色的发电性能与优雅的建筑融合度可以并行不悖。</p>
+    </div>
+  </div>
+
+  <div class="hs-feature-row is-reverse">
+    <div class="hs-feature-media">
+      <img src="/Uploads/images/20241124/w-w-d-4.jpg" alt="严苛质量保证" loading="lazy" decoding="async" />
+    </div>
+    <div class="hs-feature-text">
+      <span class="hs-feature-num">04 · 权威认证</span>
+      <h2>全流程严苛质量保证</h2>
+      <p>我们的光伏组件在生产的每一个关键工序都执行严格的质量控制与 EL 检测，并通过 TÜV、Intertek 等国际权威独立检测机构的严格检验和认证。</p>
+    </div>
+  </div>
+
+  <div class="hs-feature-row">
+    <div class="hs-feature-media">
+      <img src="/Uploads/images/20241124/w-w-d-5.jpg" alt="30年产品质保" loading="lazy" decoding="async" />
+    </div>
+    <div class="hs-feature-text">
+      <span class="hs-feature-num">05 · 长效质保</span>
+      <h2>长达 30 年线性功率质保</h2>
+      <p>宏晟光伏 HJT 等高效组件提供长达 30 年线性功率输出质保，第 30 年末输出功率保证最高可达 91.25%，为您的电站资产提供长周期安心守护。</p>
+    </div>
+  </div>
 </div>

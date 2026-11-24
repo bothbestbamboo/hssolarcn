@@ -56,6 +56,21 @@ const faqs = [
     a: `<p>我们通常在国内仓库备有常规功率太阳能电池板、逆变器和电池库存，常规订单一般 7–10 天即可安排发货；具体物流或海运时效将根据您的订单数量与目的地为您核算。</p>`,
   },
 ];
+
+const stripHtml = (html: string) => html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: stripHtml(item.a),
+    },
+  })),
+};
 ---
 
 <BaseLayout
@@ -64,49 +79,204 @@ const faqs = [
   keywords="光伏常见问题, 太阳能板质保, 宏晟光伏FAQ"
 >
   <InnerBanner
-    title="常见问题"
+    title="常见问题解答"
+    subtitle="集中解答关于光伏发电原理、系统组成、30 年质保政策、渠道合作与订单交付的高频疑问。"
     bannerImg="/Public/theme/default/image/faq.jpg"
     bannerAlt="常见问题"
     breadcrumbs={[{ label: '常见问题' }]}
   />
 
-  <div class="n_main">
-    <div class="container">
-      <link type="text/css" rel="stylesheet" href="/Public/theme/default/css/tem_style.css" />
-      <div class="tem_content clearfix">
-        <div class="tem_paq row">
-          <ul class="page_faq_l">
-            {faqs.map((item) => (
-              <>
-                <li class="question">
-                  <div class="column">
-                    <i></i>
-                    <em class="title">{item.q}</em>
-                  </div>
-                </li>
-                <li class="answer markdown-body" set:html={item.a} />
-                <div class="clearfix"></div>
-              </>
-            ))}
-          </ul>
-        </div>
+  <section class="hs-inner-section">
+    <div class="hs-inner-container hs-faq-container">
+      <div class="hs-faq-list">
+        {faqs.map((item, index) => (
+          <details class="hs-faq-item" open={index === 0}>
+            <summary class="hs-faq-question">
+              <span class="hs-faq-num">{String(index + 1).padStart(2, '0')}</span>
+              <span class="hs-faq-qtext">{item.q}</span>
+              <span class="hs-faq-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="hs-faq-answer markdown-body" set:html={item.a} />
+          </details>
+        ))}
       </div>
-      <script is:inline src="/Public/theme/default/js/tem_demo.js"></script>
+
+      <div class="hs-faq-cta">
+        <div>
+          <h2>还有其他技术或报价疑问？</h2>
+          <p>欢迎直接提交您的项目需求或致电 {SITE.phone}，我们的工程师团队将在 12 小时内回复。</p>
+        </div>
+        <a href="/contact-us.html" class="hs-faq-cta-btn">联系我们的团队 →</a>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 </BaseLayout>
 
-<style is:global>
-  .page_faq_l .question .title {
-    font-style: normal;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    color: #111827 !important;
+<style>
+  .hs-faq-container {
+    max-width: 960px;
   }
-  .page_faq_l .answer {
-    padding: 16px 22px !important;
-    font-size: 15px !important;
-    line-height: 1.8 !important;
-    color: #374151 !important;
+
+  .hs-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .hs-faq-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hs-faq-item[open] {
+    border-color: #93c5fd;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+  }
+
+  .hs-faq-question {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.45;
+  }
+
+  .hs-faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .hs-faq-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #eff6ff;
+    color: #2596d1;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .hs-faq-item[open] .hs-faq-num {
+    background: #2596d1;
+    color: #ffffff;
+  }
+
+  .hs-faq-qtext {
+    flex: 1 1 auto;
+  }
+
+  .hs-faq-icon {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .hs-faq-icon::before,
+  .hs-faq-icon::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 2px;
+    background: #2596d1;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .hs-faq-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .hs-faq-item[open] .hs-faq-icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 0;
+  }
+
+  .hs-faq-answer {
+    padding: 0 24px 22px 68px;
+    color: #475569;
+    font-size: 15px;
+  }
+
+  .hs-faq-answer :global(p:last-child),
+  .hs-faq-answer :global(ul:last-child) {
+    margin-bottom: 0 !important;
+  }
+
+  .hs-faq-cta {
+    margin-top: 38px;
+    padding: 34px 36px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #0f172a 0%, #164e63 55%, #1a7bb9 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .hs-faq-cta h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .hs-faq-cta p {
+    margin: 0;
+    font-size: 14.5px;
+    color: rgba(226, 232, 240, 0.92);
+  }
+
+  .hs-faq-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    height: 44px;
+    padding: 0 24px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #0f172a;
+    font-size: 14.5px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .hs-faq-cta-btn:hover {
+    background: #e0f2fe;
+    color: #1a7bb9;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 767px) {
+    .hs-faq-question {
+      padding: 16px;
+      font-size: 15.5px;
+    }
+    .hs-faq-answer {
+      padding: 0 16px 18px 16px;
+    }
+    .hs-faq-cta {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 26px 22px;
+    }
   }
 </style>

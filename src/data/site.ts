@@ -1,7 +1,21 @@
+export interface HomeBanner {
+  img: string;
+  alt: string;
+  badge: string;
+  title: string;
+  highlight: string;
+  subtitle: string;
+  primaryText: string;
+  primaryLink: string;
+  secondaryText: string;
+  secondaryLink: string;
+}
+
 export const SITE = {
   name: '宏晟光伏',
   title: '宏晟光伏: 太阳能板与光伏板的生产厂家',
-  description: '宏晟光伏是太阳能板与光伏板的生产厂家，专业生产N型TOPCon、HJT异质结太阳能组件、逆变器及电池储能系统。',
+  description:
+    '宏晟光伏是太阳能板与光伏板的生产厂家，专业生产N型TOPCon、HJT异质结太阳能组件、逆变器及电池储能系统。',
   keywords: '太阳能板, 光伏板, 光伏组件, 宏晟光伏',
   logoLight: '/Uploads/images/logocn-dark.png',
   logoDark: '/Uploads/images/logocn.png',
@@ -16,6 +30,36 @@ export const SITE = {
     { name: 'bamboo decking', href: 'https://www.bambooindustry.com/' },
   ],
 };
+
+// 首页轮播图文配置（保持原图片路径不变，后期改图改字只需改这里）
+export const HOME_BANNERS: HomeBanner[] = [
+  {
+    img: '/Uploads/images/20241119/673c9f32ace84.jpg',
+    alt: '宏晟光伏高效太阳能板生产厂家',
+    badge: '源头光伏制造基地 · 10年深耕',
+    title: '高效太阳能光伏组件',
+    highlight: '助力全球绿色能源升级',
+    subtitle:
+      '全自动化智造产线，规模化量产 N 型 TOPCon、HJT 异质结及 PERC 组件，最高功率达 750Wp，通过 TÜV、Intertek 权威认证。',
+    primaryText: '探索光伏组件',
+    primaryLink: '/category-1.html',
+    secondaryText: '获取厂家报价',
+    secondaryLink: '/contact-us.html',
+  },
+  {
+    img: '/Uploads/images/20241119/673c9f55de2e1.jpg',
+    alt: '宏晟光伏一站式光储系统解决方案',
+    badge: '一站式光储系统供应商',
+    title: '智能逆变器与',
+    highlight: '锂电池储能系统方案',
+    subtitle:
+      '覆盖户用、工商业及集装箱储能应用场景，提供并网、混合、离网全套系统设计与成套设备直供，产品远销全球 110+ 国家和地区。',
+    primaryText: '浏览储能系统',
+    primaryLink: '/category-4.html',
+    secondaryText: '咨询系统选型',
+    secondaryLink: '/contact-us.html',
+  },
+];
 
 export const PRODUCT_CATEGORIES = [
   {
