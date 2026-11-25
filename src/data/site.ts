@@ -26,8 +26,8 @@ export const SITE = {
   copyright: 'Copyright © 2026 宣城宏晟光伏科技有限公司 版权所有',
   web3formsKey: '007ddd91-be4f-4381-b504-f9464f95e06d',
   friendlyLinks: [
-    { name: 'Homesun Solar Panels', href: 'https://www.hssolar.com/' },
-    { name: 'bamboo decking', href: 'https://www.bambooindustry.com/' },
+    { name: 'HS Solar English Site', href: 'https://www.hssolar.com/' },
+    { name: 'https://www.bambooindustry.com/', href: 'https://www.bambooindustry.com/' },
   ],
 };
 
