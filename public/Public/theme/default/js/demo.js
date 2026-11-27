@@ -76,28 +76,7 @@ jQuery(function ($) {
     $('.search_input').css({ height: '0' });
   });
 
-  /* 3. 右下角在线询盘浮窗 */
-  if ($('.animated-circles').length) {
-    setInterval(function () {
-      $('.animated-circles').toggleClass('animated');
-    }, 3000);
-  }
-
-  $('#floatShow').on('click', function (e) {
-    e.preventDefault();
-    $('#onlineService').stop(true, true).animate({ height: 'show', opacity: 'show' }, 'normal');
-    $('#floatShow').css({ display: 'none', opacity: 0 });
-    $('#floatHide').css({ display: 'block', opacity: 1 });
-  });
-
-  $('#floatHide').on('click', function (e) {
-    e.preventDefault();
-    $('#onlineService').stop(true, true).animate({ height: 'hide', opacity: 'hide' }, 'normal');
-    $('#floatShow').css({ display: 'block', opacity: 1 });
-    $('#floatHide').css({ display: 'none', opacity: 0 });
-  });
-
-  /* 4. FAQ 折叠面板 */
+  /* 3. FAQ 折叠面板 */
   var $accordions = $('.accordion');
   if ($accordions.length) {
     $accordions.find('> li:eq(0) a').addClass('active').next().slideDown();
@@ -116,7 +95,7 @@ jQuery(function ($) {
     });
   }
 
-  /* 5. 页内锚点平滑滚动 */
+  /* 4. 页内锚点平滑滚动 */
   $('.main-more a[href*="#"], area[href*="#"]').on('click', function () {
     if (
       location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') &&
@@ -132,7 +111,7 @@ jQuery(function ($) {
     }
   });
 
-  /* 6. 左侧产品分类栏（桌面端常显，手机端<=992px点击展开/收起） */
+  /* 5. 左侧产品分类栏（桌面端常显，手机端<=992px点击展开/收起） */
   var $modules = $('.modules');
   if ($modules.length) {
     var iconPlus = 'icon-plus-sign';
@@ -166,7 +145,7 @@ jQuery(function ($) {
     $(window).on('resize', syncSidebarAccordion);
   }
 
-  /* 7. Play Solar 等内页锚点按钮跳转与高亮 */
+  /* 6. Play Solar 等内页锚点按钮跳转与高亮 */
   $('.pnav-link, .header-pnav-link').on('click', function (e) {
     var targetSelector = $(this).attr('data-href') || $(this).attr('href');
     if (targetSelector && targetSelector.charAt(0) === '#') {
@@ -209,7 +188,7 @@ jQuery(function ($) {
     }
   }
 
-  /* 8. 按需初始化 Swiper */
+  /* 7. 按需初始化 Swiper */
   if (typeof Swiper === 'undefined') return;
 
   if (document.querySelector('.swiper-banner')) {
