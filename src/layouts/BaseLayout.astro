@@ -46,13 +46,8 @@ const {
     <link rel="stylesheet" href="/Public/theme/default/css/swiper.css">
     <link rel="stylesheet" href="/Public/theme/default/css/style.css">
 
-    <!-- 图标字体异步加载，不阻塞首屏绘制 -->
-    <link
-      rel="stylesheet"
-      href="/Public/theme/default/css/font-awesome.min.css"
-      media="print"
-      onload="this.media='all'"
-    >
+    <!-- 图标字体改为常规加载，消除二次排队延迟 -->
+    <link rel="stylesheet" href="/Public/theme/default/css/font-awesome.min.css">
 
     {needLightbox && (
       <link
@@ -62,10 +57,6 @@ const {
         onload="this.media='all'"
       >
     )}
-
-    <noscript>
-      <link rel="stylesheet" href="/Public/theme/default/css/font-awesome.min.css">
-    </noscript>
 
     <slot name="head" />
 
